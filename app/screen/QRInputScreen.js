@@ -3,7 +3,6 @@ import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Titl
 
 export default class QRInputScreen extends Component {
     render() {
-        const { navigate } = this.props.navigation;
         return (
             <Container>
                 <Header>
@@ -21,9 +20,9 @@ export default class QRInputScreen extends Component {
                         </Button>
                     </Right>
                 </Header>
-                <Content style={{flex: 1,backgroundColor: '#635DB7'}}>
-                    <Form style={{flex: 1,justifyContent: 'space-around'}}>
-                        <Item success>
+                <Content style={{flex: 1}}>
+                    <Form style={{flex: 1}}>
+                        <Item regular>
                             <Input placeholder='输入编号'/>
                         </Item>
                         <View style={{flex: 1,flexDirection: 'row',justifyContent: 'space-around'}}>

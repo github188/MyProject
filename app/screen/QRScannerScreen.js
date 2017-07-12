@@ -4,9 +4,73 @@ import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Titl
 import Camera from 'react-native-camera';
 import Dimensions from 'Dimensions';
 
+
+class QRScannerMaskView extends Component{
+    render() {
+        return (
+            <View
+                style={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    position: 'absolute',
+                    top: 0,
+                    right: 0,
+                    left: 0,
+                    bottom: 0
+                }}>
+
+                <View style={{
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    height: 200,
+                    width: 200,
+                }}>
+                </View>
+
+                <View style={{
+                    backgroundColor: '#0000004D',
+                    position: 'absolute',
+                    top: 0,
+                    bottom: 350,
+                    width: 500,
+                }}/>
+
+                <View style={{
+                    backgroundColor: '#0000004D',
+                    position: 'absolute',
+                    left: 0,
+                    height: 600,
+                    width: 100,
+                }}/>
+
+                <View style={{
+                    backgroundColor: '#0000004D',
+                    position: 'absolute',
+                    right: 0,
+                    height: 600,
+                    width: 100,
+                }}/>
+
+                <View style={{
+                    backgroundColor: '#0000004D',
+                    position: 'absolute',
+                    bottom: 0,
+                    top: 350,
+                    width: 500,
+                }}/>
+
+                <View style={{position: 'absolute', bottom: 100}}>
+                    <Text>对准二维码</Text>
+                </View>
+
+            </View>
+        );
+    }
+}
+
+
 export default class QRScannerScreen extends Component {
     render() {
-        const { navigate } = this.props.navigation;
         return (
             <Container>
                 <Header>
@@ -24,7 +88,7 @@ export default class QRScannerScreen extends Component {
                         </Button>
                     </Right>
                 </Header>
-                <Content style = {styles.container}>
+                <Content>
                     <Camera
                         ref={(cam) => {
                         this.camera = cam;
@@ -33,6 +97,7 @@ export default class QRScannerScreen extends Component {
                         aspect={Camera.constants.Aspect.fill}
                         barCodeTypes={['qr']}
                         onBarCodeRead={this.readQR.bind(this)}>
+                        <QRScannerMaskView/>
                     </Camera>
                     <View style={{flexDirection: 'row',justifyContent: 'space-around'}}>
                         <Button rounded onPress={() => this.props.navigation.navigate('QRInput')}>
@@ -47,15 +112,12 @@ export default class QRScannerScreen extends Component {
         );
     }
 
-    takePicture() {
-        const options = {};
-        //options.location = ...
-        this.camera.capture({metadata: options})
-            then((data) => console.log(data))
-          . catch(err => console.error(err));
+    readQR(e) {
+        //do sth
+        if (e.data == '123'){
+            console.log('e',e.data);
+        }
     }
-
-    readQR(e) {console.log('e',e)}
 }
 
 const styles = StyleSheet.create({
@@ -66,4 +128,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-end',
         alignItems: 'center'
     }
+
+
 });

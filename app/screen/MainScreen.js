@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import { StackNavigator } from 'react-navigation';
 import { Container, Header, Content, Footer, FooterTab, Body, Left, Right, Button, Text, Icon, Title,View,Fab,Card,CardItem } from "native-base";
-import MenuScreen from './MenuScreen';
 import { MapView, MapTypes, MapModule, Geolocation } from 'react-native-baidu-map';
 import Dimensions from 'Dimensions';
 

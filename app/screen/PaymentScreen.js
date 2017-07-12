@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title,List, ListItem} from "native-base";
+import { StyleSheet } from 'react-native';
+import { Container, Header, Content, Footer, FooterTab, Body, Left, Right, Button, Text, Icon, Title,View,Fab,Card,CardItem } from "native-base";
 
-export default class NotificationScreen extends Component {
+export default class PaymentScreen extends Component {
     render() {
-        let items = ['Message1','Message2','Message3']
         return (
             <Container>
                 <Header>
@@ -13,7 +13,7 @@ export default class NotificationScreen extends Component {
                         </Button>
                     </Left>
                     <Body>
-                        <Title>我的消息</Title>
+                        <Title>登录</Title>
                     </Body>
                     <Right>
                         <Button transparent>
@@ -21,14 +21,6 @@ export default class NotificationScreen extends Component {
                         </Button>
                     </Right>
                 </Header>
-                <Content>
-                <List dataArray={items} renderRow={(item) =>
-                    <ListItem>
-                    <Text>{item}</Text>
-                    </ListItem>
-                }>
-                </List>
-                </Content>
             </Container>
         );
     }
