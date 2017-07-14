@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, View} from "native-base";
+import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, View,Toast} from "native-base";
 import Camera from 'react-native-camera';
 import Dimensions from 'Dimensions';
 
 
 class QRScannerMaskView extends Component{
+    static defaultProps = {
+        maskColor: '#ffffff4C',
+        rectHeight: 200,
+        rectWidth: 200,
+        bottomMenuHeight: 100
+    }
+
     render() {
         return (
             <View
@@ -22,8 +29,8 @@ class QRScannerMaskView extends Component{
                 <View style={{
                     alignItems: 'center',
                     justifyContent: 'center',
-                    height: 200,
-                    width: 200,
+                    height: 250,
+                    width: 250,
                 }}>
                 </View>
 
@@ -39,16 +46,16 @@ class QRScannerMaskView extends Component{
                     backgroundColor: '#0000004D',
                     position: 'absolute',
                     left: 0,
-                    height: 600,
-                    width: 100,
+                    height: this.props.rectHeight,
+                    width: 75,
                 }}/>
 
                 <View style={{
                     backgroundColor: '#0000004D',
                     position: 'absolute',
                     right: 0,
-                    height: 600,
-                    width: 100,
+                    height: this.props.rectHeight,
+                    width: 75,
                 }}/>
 
                 <View style={{
@@ -115,6 +122,11 @@ export default class QRScannerScreen extends Component {
     readQR(e) {
         //do sth
         if (e.data == '123'){
+            Toast.show({
+                          text: e.data,
+                          position: 'bottom',
+                          buttonText: 'OK'
+                        })
             console.log('e',e.data);
         }
     }

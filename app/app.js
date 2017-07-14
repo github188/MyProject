@@ -1,4 +1,6 @@
 import { StackNavigator } from 'react-navigation';
+import React from 'react';
+import { Root } from "native-base";
 import MainScreen from './screen/MainScreen';
 import MenuScreen from './screen/MenuScreen';
 import NotificationScreen from './screen/NotificationScreen';
@@ -9,7 +11,7 @@ import PaymentScreen from './screen/PaymentScreen';
 
 global.ifLogin=false;
 
-const app = StackNavigator({
+const App = StackNavigator({
     Main: { screen: MainScreen },
     Menu: { screen: MenuScreen },
     Notification: { screen: NotificationScreen },
@@ -21,4 +23,7 @@ const app = StackNavigator({
     headerMode: 'none'
 });
 
-export default app;
+export default () =>
+    <Root>
+        <App/>
+    </Root>;
