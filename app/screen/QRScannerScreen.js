@@ -13,9 +13,36 @@ class QRScannerMaskView extends Component{
         bottomMenuHeight: 100
     }
 
+    constructor(props){
+        super(props);
+        this.state ={
+            totalLayoutWidth: 360,
+            totalLayoutHeight: 480
+        };
+    }
+
+    getTotalSize(e){
+        let totalLayout=e.layout;
+        this.setState({
+            totalWidth : totalLayout.width,
+            totalHeight : totalLayout.height,
+        })
+        console.log('totalLayoutWidth',this.state.totalWidth);
+        console.log('totalLayoutHeight',this.state.totalHeight);
+    }
+
+    getSideWidth(){
+        return (this.state.totalWidth - this.props.rectWidth)/2
+    }
+
+    getTopHeight(){
+        return (this.state.totalHeight - this.props.rectHeight)/2
+    }
+
     render() {
         return (
             <View
+                onLayout={({nativeEvent: e}) => this.getTotalSize(e)}
                 style={{
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -23,14 +50,15 @@ class QRScannerMaskView extends Component{
                     top: 0,
                     right: 0,
                     left: 0,
-                    bottom: 0
+                    bottom: 0,
+                    flex : 1
                 }}>
 
                 <View style={{
                     alignItems: 'center',
                     justifyContent: 'center',
-                    height: 250,
-                    width: 250,
+                    height: this.getTopHeight(),
+                    width: this.state.totalWidth,
                 }}>
                 </View>
 
@@ -38,8 +66,8 @@ class QRScannerMaskView extends Component{
                     backgroundColor: '#0000004D',
                     position: 'absolute',
                     top: 0,
-                    bottom: 350,
-                    width: 500,
+                    height: this.getTopHeight(),
+                    width: this.state.totalWidth
                 }}/>
 
                 <View style={{
@@ -47,7 +75,7 @@ class QRScannerMaskView extends Component{
                     position: 'absolute',
                     left: 0,
                     height: this.props.rectHeight,
-                    width: 75,
+                    width: this.getSideWidth()
                 }}/>
 
                 <View style={{
@@ -55,19 +83,19 @@ class QRScannerMaskView extends Component{
                     position: 'absolute',
                     right: 0,
                     height: this.props.rectHeight,
-                    width: 75,
+                    width: this.getSideWidth()
                 }}/>
 
                 <View style={{
                     backgroundColor: '#0000004D',
                     position: 'absolute',
                     bottom: 0,
-                    top: 350,
-                    width: 500,
+                    height: this.getTopHeight(),
+                    width: this.state.totalWidth,
                 }}/>
 
-                <View style={{position: 'absolute', bottom: 100}}>
-                    <Text>对准二维码</Text>
+                <View style={{position: 'absolute', bottom: this.getTopHeight()/2}}>
+                    <Text style={{color:'white'}}>对准二维码</Text>
                 </View>
 
             </View>
@@ -95,7 +123,7 @@ export default class QRScannerScreen extends Component {
                         </Button>
                     </Right>
                 </Header>
-                <Content>
+                <View style={{flex:1}}>
                     <Camera
                         ref={(cam) => {
                         this.camera = cam;
@@ -106,29 +134,33 @@ export default class QRScannerScreen extends Component {
                         onBarCodeRead={this.readQR.bind(this)}>
                         <QRScannerMaskView/>
                     </Camera>
-                    <View style={{flexDirection: 'row',justifyContent: 'space-around'}}>
-                        <Button rounded onPress={() => this.props.navigation.navigate('QRInput')}>
-                            <Icon name='md-hand'/>
-                        </Button>
-                        <Button rounded>
-                            <Icon name='md-bulb'/>
-                        </Button>
+                    <View style={{flexDirection: 'row',justifyContent: 'space-around',backgroundColor:'black'}}>
+                        <View style={{justifyContent: 'center',alignItems:'center'}}>
+                            <Button rounded onPress={() => this.props.navigation.navigate('QRInput')}>
+                                <Icon name='md-hand'/>
+                            </Button>
+                            <Text style={{color:'white'}}>手动输入编号</Text>
+                        </View>
+                        <View style={{justifyContent: 'center',alignItems:'center'}}>
+                            <Button rounded>
+                                <Icon name='md-bulb'/>
+                            </Button>
+                            <Text style={{color:'white'}}>打开手电筒</Text>
+                        </View>
                     </View>
-                </Content>
+                </View>
             </Container>
         );
     }
 
     readQR(e) {
         //do sth
-        if (e.data == '123'){
-            Toast.show({
+        Toast.show({
                           text: e.data,
                           position: 'bottom',
                           buttonText: 'OK'
                         })
-            console.log('e',e.data);
-        }
+        console.log('e',e.data);
     }
 }
 
