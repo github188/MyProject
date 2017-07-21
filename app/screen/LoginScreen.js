@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Body, Left, Right, Button, Text, Icon, Title,View,Input,Item,Picker } from "native-base";
 import Dimensions from 'Dimensions';
+import {connect} from 'react-redux';
+import {login} from '../actions/Login'
 
 export default class LoginScreen extends Component {
     constructor(props) {

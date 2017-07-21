@@ -9,7 +9,7 @@ import QRInputScreen from './screen/QRInputScreen';
 import LoginScreen from './screen/LoginScreen';
 import PaymentScreen from './screen/PaymentScreen';
 
-global.ifLogin=false;
+const store = configureStore();
 
 const App = StackNavigator({
     Main: { screen: MainScreen },
@@ -23,7 +23,14 @@ const App = StackNavigator({
     headerMode: 'none'
 });
 
-export default () =>
-    <Root>
-        <App/>
-    </Root>;
+export default class app extends Component {
+    render() {
+        return (
+            <Provider store={store}>
+                <Root>
+                    <App/>
+                </Root>;
+            </Provider>
+        );
+    }
+}
