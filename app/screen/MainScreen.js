@@ -4,6 +4,7 @@ import { Container, Header, Content, Footer, FooterTab, Body, Left, Right, Butto
 import { MapView, MapTypes, MapModule, Geolocation } from 'react-native-baidu-map';
 import Dimensions from 'Dimensions';
 import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
 
 const windowHeight = Dimensions.get('window').height;
 const initialLongitude = 121.480232
@@ -104,6 +105,13 @@ class MainScreen extends Component {
                                 if (this.props.isLogin){
                                     this.props.navigation.navigate('QRScanner');}
                                 else{
+                                    const gotoQRScan = NavigationActions.reset({
+                                      index: 0,
+                                      actions: [
+                                        NavigationActions.navigate({ routeName: 'QRScanner'})
+                                      ]
+                                    })
+                                    this.props.navigation.dispatch(gotoQRScan);
                                     this.props.navigation.navigate('Login');}
                                 }}>
                                 <Text>立即用伞</Text>

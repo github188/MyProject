@@ -18,6 +18,7 @@ const Nav = StackNavigator({
     Login : { screen:LoginScreen},
     Payment : { screen :PaymentScreen}
 },{
+    initialRouteName:'Main',
     headerMode: 'none'
 });
 

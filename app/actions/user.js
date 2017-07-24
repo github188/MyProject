@@ -1,18 +1,12 @@
 'use strict';
 import * as types from './types';
 
-let testUser = {
-    name: 'Kuma',
-    id: 1,
-    custId: 1
-};
-
-export function login(){
+export function login(opt){
     return dispatch => {
         dispatch({type: types.LOGIN_DOING});
         let result = fetch('http://www.baidu.com')
             .then((res)=>{
-                dispatch({type: types.LOGIN_DOING, result: true, user:testUser});
+                dispatch({type: types.LOGIN_SUCCESS, result: true, user:opt.name});
             })
             .catch((e)=>{
                 dispatch({type: types.LOGIN_ERROR, result:false, error:e});

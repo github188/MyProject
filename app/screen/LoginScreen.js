@@ -9,10 +9,13 @@ class LoginScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          selected: "+86"
-          username: null
-          veriCode: null
+          selected: "+86",
+          username: null,
+          veriCode: null,
         };
+        this.onChangeName = this.onChangeName.bind(this);
+        this.onChangeVeriCode = this.onChangeVeriCode.bind(this);
+        this.handleLogin = this.handleLogin.bind(this);
     }
     onValueChange(value: string) {
         this.setState({
@@ -30,16 +33,13 @@ class LoginScreen extends Component {
 
     handleLogin(){
         if(!this.state.username || !this.state.veriCode){
-            AlertIOS.alert(
-                 'username, password?'
-            );
             return;
         }
         let opt = {
             'name': this.state.username,
-            'password': this.state.password,
         };
-        this.props.dispatch(logIn(opt));
+        this.props.dispatch(login(opt));
+        console.log('',)
     }
 
     render() {
@@ -71,19 +71,22 @@ class LoginScreen extends Component {
                             <Item label="+86" value="+86" />
                         </Picker>
                         <Item regular style={{flex:2}}>
-                            <Input placeholder='请输入手机号' />
+                            <Input placeholder='请输入手机号' onChangeText={this.onChangeName} />
                         </Item>
                     </View>
                     <View style={{flexDirection: 'row',justifyContent: 'space-between',}}>
                         <Item regular style={{flex:1}}>
-                            <Input placeholder='请输入验证码' />
+                            <Input placeholder='请输入验证码' onChangeText={this.onChangeVeriCode}/>
                         </Item>
                         <Button>
                             <Text>获取验证码</Text>
                         </Button>
                     </View>
                     <View style={{justifyContent: 'center',backgroundColor: 'powderblue'}}>
-                        <Button style={{flex:1}}>
+                        <Button style={{flex:1}} onPress = {() =>{
+                            this.handleLogin();
+                            this.props.navigation.goBack();
+                            }}>
                             <Text>确定</Text>
                         </Button>
                     </View>
