@@ -2,13 +2,13 @@
 import * as types from './types';
 
 let testUser = {
-    'name': 'Kuma',
-    'id': 1
-    'custId': 1
+    name: 'Kuma',
+    id: 1,
+    custId: 1
 };
 
 export function login(){
-    return dispatch = >{
+    return dispatch => {
         dispatch({type: types.LOGIN_DOING});
         let result = fetch('http://www.baidu.com')
             .then((res)=>{

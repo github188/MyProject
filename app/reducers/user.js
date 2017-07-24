@@ -1,6 +1,6 @@
 'use strict'
 
-import * as types from '../actions/types':
+import * as types from '../actions/types';
 
 const initialState={
     isLogin:false,
@@ -29,7 +29,7 @@ export default function user(state=initialState,action){
                     status:null
             };
 
-        case type:LOGOUT_DOING:
+        case types.LOGOUT_DOING:
             return{...state,
                     status:'doing'
             };

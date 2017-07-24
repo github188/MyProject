@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Body, Left, Right, Button, Text, Icon, Title,View,Fab,Card,CardItem } from "native-base";
 import { MapView, MapTypes, MapModule, Geolocation } from 'react-native-baidu-map';
 import Dimensions from 'Dimensions';
+import { connect } from 'react-redux';
 
 const windowHeight = Dimensions.get('window').height;
 const initialLongitude = 121.480232
@@ -32,10 +33,10 @@ const styles ={
                 paddingBottom: windowHeight/20}
 };
 
-export default class MainScreen extends Component {
+class MainScreen extends Component {
 
-    constructor() {
-        super();
+    constructor(props){
+        super(props);
         this.refreshCurrentPosition();
         this.state = {
             mayType: MapTypes.NORMAL,
@@ -99,7 +100,12 @@ export default class MainScreen extends Component {
                                 onPress={() => this.refreshCurrentPosition()}>
                                 <Icon name='md-locate' />
                             </Button>
-                            <Button rounded onPress={() => this.props.navigation.navigate('QRScanner')}>
+                            <Button rounded onPress={() => {
+                                if (this.props.isLogin){
+                                    this.props.navigation.navigate('QRScanner');}
+                                else{
+                                    this.props.navigation.navigate('Login');}
+                                }}>
                                 <Text>立即用伞</Text>
                             </Button>
                             <Button transparent>
@@ -147,3 +153,12 @@ export default class MainScreen extends Component {
             icon: 'icon_umbrella'}];
     }
 }
+
+function select(store){
+  return {
+    isLogin: store.user.isLogin
+  }
+}
+
+
+export default connect(select)(MainScreen);

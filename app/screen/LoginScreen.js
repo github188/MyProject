@@ -3,13 +3,15 @@ import { StyleSheet } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Body, Left, Right, Button, Text, Icon, Title,View,Input,Item,Picker } from "native-base";
 import Dimensions from 'Dimensions';
 import {connect} from 'react-redux';
-import {login} from '../actions/Login'
+import {login} from '../actions/user'
 
-export default class LoginScreen extends Component {
+class LoginScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
           selected: "+86"
+          username: null
+          veriCode: null
         };
     }
     onValueChange(value: string) {
@@ -17,6 +19,29 @@ export default class LoginScreen extends Component {
           selected: value
         });
     }
+
+    onChangeName(text){
+        this.setState({username: text});
+    }
+
+    onChangeVeriCode(text){
+        this.setState({veriCode: text});
+    }
+
+    handleLogin(){
+        if(!this.state.username || !this.state.veriCode){
+            AlertIOS.alert(
+                 'username, password?'
+            );
+            return;
+        }
+        let opt = {
+            'name': this.state.username,
+            'password': this.state.password,
+        };
+        this.props.dispatch(logIn(opt));
+    }
+
     render() {
         return (
             <Container>
@@ -67,3 +92,15 @@ export default class LoginScreen extends Component {
         );
     }
 }
+
+
+function select(store){
+    return {
+        isLogin: store.user.isLogin,
+        user: store.user.user,
+        status: store.user.status,
+    }
+}
+
+
+export default connect(select)(LoginScreen);

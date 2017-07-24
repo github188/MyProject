@@ -1,5 +1,5 @@
 import { StackNavigator } from 'react-navigation';
-import React from 'react';
+import React,{Component} from 'react';
 import { Root } from "native-base";
 import MainScreen from './screen/MainScreen';
 import MenuScreen from './screen/MenuScreen';
@@ -9,9 +9,7 @@ import QRInputScreen from './screen/QRInputScreen';
 import LoginScreen from './screen/LoginScreen';
 import PaymentScreen from './screen/PaymentScreen';
 
-const store = configureStore();
-
-const App = StackNavigator({
+const Nav = StackNavigator({
     Main: { screen: MainScreen },
     Menu: { screen: MenuScreen },
     Notification: { screen: NotificationScreen },
@@ -23,14 +21,12 @@ const App = StackNavigator({
     headerMode: 'none'
 });
 
-export default class app extends Component {
+export default class App extends Component {
     render() {
         return (
-            <Provider store={store}>
-                <Root>
-                    <App/>
-                </Root>;
-            </Provider>
+            <Root>
+                <Nav/>
+            </Root>
         );
     }
 }
