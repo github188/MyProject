@@ -17,21 +17,27 @@ const styles ={
         height: windowHeight
     },
     view_card_bar:{
-                    position: 'absolute',
-                    left: 0,
-                    right: 0,
-                    justifyContent: 'space-around',
-                    alignItems: 'center',
-                    paddingTop: windowHeight/40},
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        paddingTop: windowHeight/40
+    },
     view_button_bar:{
-                flexDirection: 'row',
-                position: 'absolute',
-                left: 0,
-                bottom: 0,
-                right: 0,
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                paddingBottom: windowHeight/20}
+        flexDirection: 'row',
+        position: 'absolute',
+        left: 0,
+        bottom: 0,
+        right: 0,
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingBottom: windowHeight/20
+    },
+    view_card_bar_item:{
+        justifyContent: 'space-around',
+        height: windowHeight/15,
+    }
 };
 
 class MainScreen extends Component {
@@ -61,7 +67,7 @@ class MainScreen extends Component {
             <Container>
                 <Header>
                     <Left>
-                        <Button transparent onPress={() => this.props.navigation.navigate('Menu')}>
+                        <Button transparent onPress={() => this.redirect2Login('Menu')}>
                             <Icon name='menu' />
                         </Button>
                     </Left>
@@ -69,7 +75,7 @@ class MainScreen extends Component {
                         <Title>共享雨伞</Title>
                     </Body>
                     <Right>
-                        <Button transparent onPress={() => this.props.navigation.navigate('Notification')}>
+                        <Button transparent onPress={() => this.redirect2Login('Notification')}>
                             <Icon name='notifications' />
                         </Button>
                     </Right>
@@ -87,11 +93,11 @@ class MainScreen extends Component {
                         </MapView>
                         <View style={styles.view_card_bar}>
                             <Card>
-                                <CardItem style={{justifyContent: 'space-around',height: windowHeight/15,/*backgroundColor: '#222222'*/}}>
+                                <CardItem style={styles.view_card_bar_item}>
                                     <Icon name='md-pin' color=''/>
                                     <Text>{this.state.current_address}</Text>
                                 </CardItem>
-                                <CardItem style={{justifyContent: 'space-around',height: windowHeight/15,/*backgroundColor: '#111111'*/}}>
+                                <CardItem style={styles.view_card_bar_item}>
                                     <Text>剩余x把 距离xx米 步行x分钟</Text>
                                 </CardItem>
                             </Card>
@@ -101,19 +107,7 @@ class MainScreen extends Component {
                                 onPress={() => this.refreshCurrentPosition()}>
                                 <Icon name='md-locate' />
                             </Button>
-                            <Button rounded onPress={() => {
-                                if (this.props.isLogin){
-                                    this.props.navigation.navigate('QRScanner');}
-                                else{
-                                    const gotoQRScan = NavigationActions.reset({
-                                      index: 0,
-                                      actions: [
-                                        NavigationActions.navigate({ routeName: 'QRScanner'})
-                                      ]
-                                    })
-                                    this.props.navigation.dispatch(gotoQRScan);
-                                    this.props.navigation.navigate('Login');}
-                                }}>
+                            <Button rounded onPress={() => this.redirect2Login('QRScanner')}>
                                 <Text>立即用伞</Text>
                             </Button>
                             <Button transparent>
@@ -123,6 +117,14 @@ class MainScreen extends Component {
                     </View>
             </Container>
         );
+    }
+
+    redirect2Login(nextScreen){
+        if (this.props.isLogin){
+            this.props.navigation.navigate(nextScreen);}
+        else{
+            this.props.navigation.navigate('Login',{next: nextScreen});
+        }
     }
 
     refreshCurrentPosition(){

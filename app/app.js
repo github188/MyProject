@@ -1,6 +1,7 @@
-import { StackNavigator } from 'react-navigation';
-import React,{Component} from 'react';
-import { Root } from "native-base";
+import { addNavigationHelpers,StackNavigator } from 'react-navigation';
+import React,{Component} from 'react';import { Root } from "native-base";
+import { connect } from 'react-redux';
+
 import MainScreen from './screen/MainScreen';
 import MenuScreen from './screen/MenuScreen';
 import NotificationScreen from './screen/NotificationScreen';
@@ -9,7 +10,7 @@ import QRInputScreen from './screen/QRInputScreen';
 import LoginScreen from './screen/LoginScreen';
 import PaymentScreen from './screen/PaymentScreen';
 
-const Nav = StackNavigator({
+export const AppNavigator = StackNavigator({
     Main: { screen: MainScreen },
     Menu: { screen: MenuScreen },
     Notification: { screen: NotificationScreen },
@@ -22,12 +23,14 @@ const Nav = StackNavigator({
     headerMode: 'none'
 });
 
-export default class App extends Component {
-    render() {
-        return (
-            <Root>
-                <Nav/>
-            </Root>
-        );
-    }
-}
+const AppWithNavigationState = ({ dispatch, nav }) => (
+    <Root>
+        <AppNavigator navigation={addNavigationHelpers({ dispatch, state: nav })} />
+    </Root>
+);
+
+const mapStateToProps = state => ({
+  nav: state.nav,
+});
+
+export default connect(mapStateToProps)(AppWithNavigationState);

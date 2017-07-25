@@ -4,6 +4,7 @@ import { Container, Header, Content, Footer, FooterTab, Body, Left, Right, Butto
 import Dimensions from 'Dimensions';
 import {connect} from 'react-redux';
 import {login} from '../actions/user'
+import { NavigationActions } from 'react-navigation'
 
 class LoginScreen extends Component {
     constructor(props) {
@@ -85,7 +86,7 @@ class LoginScreen extends Component {
                     <View style={{justifyContent: 'center',backgroundColor: 'powderblue'}}>
                         <Button style={{flex:1}} onPress = {() =>{
                             this.handleLogin();
-                            this.props.navigation.goBack();
+                            this.props.navigation.dispatch({type:'Login',next:this.props.navigation.state.params.next});
                             }}>
                             <Text>确定</Text>
                         </Button>
