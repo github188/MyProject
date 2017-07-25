@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
-import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, View,Toast} from "native-base";
+import { StyleSheet,View } from 'react-native';
+import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title,Toast} from "native-base";
 import Camera from 'react-native-camera';
 import Dimensions from 'Dimensions';
 
@@ -48,6 +48,15 @@ const styles = {
     },
     view_hint:{
         position: 'absolute',
+    },
+    view_button_container:{
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        backgroundColor:'black'
+    },
+    view_button_container_sub:{
+        justifyContent: 'center',
+        alignItems:'center'
     },
 };
 
@@ -157,14 +166,14 @@ export default class QRScannerScreen extends Component {
                         onBarCodeRead={this.readQR.bind(this)}>
                         <QRScannerMaskView/>
                     </Camera>
-                    <View style={{flexDirection: 'row',justifyContent: 'space-around',backgroundColor:'black'}}>
-                        <View style={{justifyContent: 'center',alignItems:'center'}}>
+                    <View style={styles.view_button_container}>
+                        <View style={styles.view_button_container_sub}>
                             <Button rounded onPress={() => this.props.navigation.navigate('QRInput')}>
                                 <Icon name='md-hand'/>
                             </Button>
                             <Text style={{color:'white'}}>手动输入编号</Text>
                         </View>
-                        <View style={{justifyContent: 'center',alignItems:'center'}}>
+                        <View style={styles.view_button_container_sub}>
                             <Button rounded>
                                 <Icon name='md-bulb'/>
                             </Button>
