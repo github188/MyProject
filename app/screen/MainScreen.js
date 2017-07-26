@@ -150,7 +150,7 @@ class MainScreen extends Component {
             })
     }
 
-    getUmbrellaLocation(currentlatitude,currentlongitude){
+    getUmbrellaLocation(currentlatitude,currentlongitude,zoom){
            //此处设置当前位置附近的借伞点
         return [{
             latitude: currentlatitude+0.002,
