@@ -5,6 +5,7 @@ import { MapView, MapTypes, MapModule, Geolocation } from 'react-native-baidu-ma
 import Dimensions from 'Dimensions';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
+import {getCurrentLocation} from '../actions/location'
 
 const windowHeight = Dimensions.get('window').height;
 const initialLongitude = 121.480232
@@ -46,19 +47,8 @@ class MainScreen extends Component {
         super(props);
         this.refreshCurrentPosition();
         this.state = {
-            mayType: MapTypes.NORMAL,
+            mapType: MapTypes.NORMAL,
             zoom: 18,
-            center: {
-              longitude: initialLongitude,
-              latitude: initialLatitude
-            },
-             current_address:null,
-            marker : {
-                latitude: initialLongitude,
-                longitude: initialLatitude,
-                title:'当前位置',
-                icon:'icon_default'},
-            markers : []
         };
       }
 
@@ -83,19 +73,23 @@ class MainScreen extends Component {
                     <View style={{ flex: 1 }}>
                         <MapView
                             zoom={this.state.zoom}
-                            mapType={this.state.mayType}
-                            center={this.state.center}
+                            mapType={this.state.mapType}
+                            center={this.props.center}
                             zoomControlsVisible ={false}
                             style={styles.map}
-                            marker ={this.state.marker}
-                            markers= {this.state.markers}
+                            marker ={{
+                                latitude: this.props.center.latitude,
+                                longitude: this.props.center.longitude,
+                                title:'当前位置',
+                                icon:'icon_default'}}
+                            markers= {this.props.stores}
                         >
                         </MapView>
                         <View style={styles.view_card_bar}>
                             <Card>
                                 <CardItem style={styles.view_card_bar_item}>
                                     <Icon name='md-pin' color=''/>
-                                    <Text>{this.state.current_address}</Text>
+                                    <Text>{this.props.address}</Text>
                                 </CardItem>
                                 <CardItem style={styles.view_card_bar_item}>
                                     <Text>剩余x把 距离xx米 步行x分钟</Text>
@@ -128,45 +122,49 @@ class MainScreen extends Component {
     }
 
     refreshCurrentPosition(){
-        this.setCurrentPosition();
+        this.props.dispatch(getCurrentLocation());
+
     }
 
-    setCurrentPosition(){
-        Geolocation.getCurrentPosition().then(data => {
-                this.setState({
-                    center: {
-                    latitude: data.latitude,
-                    longitude: data.longitude
-                    },
-                    current_address:data.street+data.streetNumber,
-                    marker : {
+    /*setCurrentPosition(){
+            Geolocation.getCurrentPosition().then(data => {
+                    this.setState({
+                        center: {
                         latitude: data.latitude,
-                        longitude: data.longitude,
-                        title:'当前位置'},
-                    markers : this.getUmbrellaLocation(data.latitude,data.longitude)
-                });
-                }).catch(e =>{
-                    console.warn(e, 'error');
-            })
-    }
+                        longitude: data.longitude
+                        },
+                        current_address:data.street+data.streetNumber,
+                        marker : {
+                            latitude: data.latitude,
+                            longitude: data.longitude,
+                            title:'当前位置'},
+                        markers : this.getUmbrellaLocation(data.latitude,data.longitude)
+                    });
+                    }).catch(e =>{
+                        console.warn(e, 'error');
+                })
+        }
 
-    getUmbrellaLocation(currentlatitude,currentlongitude,zoom){
-           //此处设置当前位置附近的借伞点
-        return [{
-            latitude: currentlatitude+0.002,
-            longitude: currentlongitude+0.002,
-            title: '全家1店 剩余3把',
-            icon: 'icon_umbrella'},{
-            latitude: currentlatitude-0.002,
-            longitude: currentlongitude-0.002,
-            title: '全家2店 剩余2把',
-            icon: 'icon_umbrella'}];
-    }
+        getUmbrellaLocation(currentlatitude,currentlongitude,zoom){
+               //此处设置当前位置附近的借伞点
+            return [{
+                latitude: currentlatitude+0.002,
+                longitude: currentlongitude+0.002,
+                title: '全家1店 剩余3把',
+                icon: 'icon_umbrella'},{
+                latitude: currentlatitude-0.002,
+                longitude: currentlongitude-0.002,
+                title: '全家2店 剩余2把',
+                icon: 'icon_umbrella'}];
+        }*/
 }
 
 function select(store){
   return {
-    isLogin: store.user.isLogin
+    isLogin: store.user.isLogin,
+    center:store.location.center,
+    stores:store.location.stores,
+    address:store.location.address
   }
 }
 

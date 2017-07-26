@@ -19,7 +19,7 @@ export default function user(state=initialState,action){
             return{...state,
                     isLogin:true,
                     user:action.user,
-                    stateus:'done'
+                    status:'done'
             };
 
         case types.LOGIN_ERROR:
@@ -38,7 +38,7 @@ export default function user(state=initialState,action){
             return{...state,
                     isLogin:false,
                     user:{},
-                    stateus:null
+                    status:null
             };
 
         case types.LOGOUT_ERROR:
@@ -50,5 +50,4 @@ export default function user(state=initialState,action){
         default:
             return state;
      }
-
 }
