@@ -5,7 +5,7 @@ import { MapView, MapTypes, MapModule, Geolocation } from 'react-native-baidu-ma
 import Dimensions from 'Dimensions';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
-import {getCurrentLocation} from '../actions/location'
+import {getCurrentLocation, getStoreLocation} from '../actions/location'
 
 const windowHeight = Dimensions.get('window').height;
 const initialLongitude = 121.480232
@@ -62,7 +62,7 @@ class MainScreen extends Component {
                         </Button>
                     </Left>
                     <Body>
-                        <Title>共享雨伞</Title>
+                        <Title alignSelf='center'>共享雨伞</Title>
                     </Body>
                     <Right>
                         <Button transparent onPress={() => this.redirect2Login('Notification')}>
@@ -123,7 +123,7 @@ class MainScreen extends Component {
 
     refreshCurrentPosition(){
         this.props.dispatch(getCurrentLocation());
-
+        this.props.dispatch(getStoreLocation(this.props.center));
     }
 
     /*setCurrentPosition(){

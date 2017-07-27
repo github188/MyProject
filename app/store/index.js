@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import rootReducer from '../reducers/index';
 
 const logger = store => next => action => {
-	if(typeof action === 'function') console.log('dispatching a function');
+	if(typeof action === 'function') console.log('dispatching a function',action);
 	else console.log('dispatching', action);
 	let result = next(action);
 	console.log('next state', store.getState());

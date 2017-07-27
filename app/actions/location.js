@@ -13,6 +13,7 @@ const test_store=[{
     icon: 'icon_umbrella'}];
 
 export function getStoreLocation(opt){
+    console.log(opt);
     return dispatch => {
         dispatch({type: types.LOCATING_STORE});
         let result = fetch('http://www.baidu.com').then((res) => {
