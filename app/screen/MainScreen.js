@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import { Container, Header, Content, Footer, FooterTab, Body, Left, Right, Button, Text, Icon, Title,View,Fab,Card,CardItem } from "native-base";
+import { Container, Header, Content, Footer, FooterTab, Body, Left, Right, Button, Text, Icon, Title,View,Fab,Card,CardItem ,StyleProvider} from "native-base";
 import { MapView, MapTypes, MapModule, Geolocation } from 'react-native-baidu-map';
 import Dimensions from 'Dimensions';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
-import {getCurrentLocation, getStoreLocation} from '../actions/location'
+import {getCurrentLocation, getStoreLocation} from '../actions/location';
+import getTheme from '../../native-base-theme/components';
+import mytheme from '../../native-base-theme/variables/mytheme'
 
 const windowHeight = Dimensions.get('window').height;
 const initialLongitude = 121.480232
@@ -54,62 +56,65 @@ class MainScreen extends Component {
 
     render() {
         return (
-            <Container>
-                <Header>
-                    <Left>
-                        <Button transparent onPress={() => this.redirect2Login('Menu')}>
-                            <Icon name='menu' />
-                        </Button>
-                    </Left>
-                    <Body>
-                        <Title alignSelf='center'>共享雨伞</Title>
-                    </Body>
-                    <Right>
-                        <Button transparent onPress={() => this.redirect2Login('Notification')}>
-                            <Icon name='notifications' />
-                        </Button>
-                    </Right>
-                </Header>
-                    <View style={{ flex: 1 }}>
-                        <MapView
-                            zoom={this.state.zoom}
-                            mapType={this.state.mapType}
-                            center={this.props.center}
-                            zoomControlsVisible ={false}
-                            style={styles.map}
-                            marker ={{
-                                latitude: this.props.center.latitude,
-                                longitude: this.props.center.longitude,
-                                title:'当前位置',
-                                icon:'icon_default'}}
-                            markers= {this.props.stores}
-                        >
-                        </MapView>
-                        <View style={styles.view_card_bar}>
-                            <Card>
-                                <CardItem style={styles.view_card_bar_item}>
-                                    <Icon name='md-pin' color=''/>
-                                    <Text>{this.props.address}</Text>
-                                </CardItem>
-                                <CardItem style={styles.view_card_bar_item}>
-                                    <Text>剩余x把 距离xx米 步行x分钟</Text>
-                                </CardItem>
-                            </Card>
+            <StyleProvider  style={getTheme(mytheme)}>
+                <Container>
+                    <Header>
+                        <Left>
+                            <Button transparent onPress={() => this.redirect2Login('Menu')}>
+                                <Icon name='menu' />
+                            </Button>
+                        </Left>
+                        <Body>
+                            <Title alignSelf='center'>共享雨伞</Title>
+                        </Body>
+                        <Right>
+                            <Button transparent onPress={() => this.redirect2Login('Notification')}>
+                                <Icon name='notifications' />
+                            </Button>
+                        </Right>
+                    </Header>
+                        <View style={{ flex: 1 }}>
+                            <MapView
+                                zoom={this.state.zoom}
+                                mapType={this.state.mapType}
+                                center={this.props.center}
+                                zoomControlsVisible ={false}
+                                style={styles.map}
+                                marker ={{
+                                    latitude: this.props.center.latitude,
+                                    longitude: this.props.center.longitude,
+                                    title:'当前位置',
+                                    icon:'icon_default'}}
+                                markers= {this.props.stores}
+                            >
+                            </MapView>
+                            <View style={styles.view_card_bar}>
+                                <Card>
+                                    <CardItem style={styles.view_card_bar_item}>
+                                        <Icon name='location-on'/>
+                                        <Text>{this.props.address}</Text>
+                                    </CardItem>
+                                    <CardItem style={styles.view_card_bar_item}>
+                                        <Text>剩余x把 距离xx米 步行x分钟</Text>
+                                    </CardItem>
+                                </Card>
+                            </View>
+                            <View style={styles.view_button_bar}>
+                                <Button transparent
+                                    onPress={() => this.refreshCurrentPosition()}>
+                                    <Icon name='my-location' />
+                                </Button>
+                                <Button rounded onPress={() => this.redirect2Login('QRScanner')}>
+                                    <Icon name='filter-center-focus' />
+                                    <Text>立即用伞</Text>
+                                </Button>
+                                <Button transparent>
+                                    <Icon name='help' />
+                                </Button>
+                            </View>
                         </View>
-                        <View style={styles.view_button_bar}>
-                            <Button transparent
-                                onPress={() => this.refreshCurrentPosition()}>
-                                <Icon name='md-locate' />
-                            </Button>
-                            <Button rounded onPress={() => this.redirect2Login('QRScanner')}>
-                                <Text>立即用伞</Text>
-                            </Button>
-                            <Button transparent>
-                                <Icon name='md-umbrella' />
-                            </Button>
-                        </View>
-                    </View>
-            </Container>
+                </Container>
+            </StyleProvider>
         );
     }
 
