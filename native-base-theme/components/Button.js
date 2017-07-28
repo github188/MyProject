@@ -464,7 +464,7 @@ export default (variables = variable) => {
     borderColor: variables.btnPrimaryBg,
     borderWidth: null,
     height: 45,
-    alignSelf: "flex-start",
+    alignSelf: "center",
     flexDirection: "row",
     elevation: 2,
     shadowColor: platformStyle === "material" ? "#000" : undefined,

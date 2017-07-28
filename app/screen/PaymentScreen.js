@@ -1,27 +1,32 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
-import { Container, Header, Content, Footer, FooterTab, Body, Left, Right, Button, Text, Icon, Title,View,Fab,Card,CardItem } from "native-base";
+import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title,List, ListItem,StyleProvider} from "native-base";
+import getTheme from '../../native-base-theme/components';
+import mytheme from '../../native-base-theme/variables/mytheme'
 
 export default class PaymentScreen extends Component {
     render() {
         return (
-            <Container>
-                <Header>
-                    <Left>
-                        <Button transparent onPress={() => this.props.navigation.goBack()}>
-                            <Icon name='arrow-back' />
-                        </Button>
-                    </Left>
-                    <Body>
-                        <Title>登录</Title>
-                    </Body>
-                    <Right>
-                        <Button transparent>
-                            <Icon name='help' />
-                        </Button>
-                    </Right>
-                </Header>
-            </Container>
+            <StyleProvider  style={getTheme(mytheme)}>
+                <Container>
+                    <Header>
+                        <Left>
+                            <Button transparent onPress={() => this.props.navigation.goBack()}>
+                                <Icon name='arrow-back' />
+                            </Button>
+                        </Left>
+                        <Body>
+                            <Title>支付</Title>
+                        </Body>
+                        <Right>
+                            <Button transparent>
+                                <Icon name='help' />
+                            </Button>
+                        </Right>
+                    </Header>
+                    <Content>
+                    </Content>
+                </Container>
+            </StyleProvider>
         );
     }
 }

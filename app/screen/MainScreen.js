@@ -69,7 +69,7 @@ class MainScreen extends Component {
                         </Body>
                         <Right>
                             <Button transparent onPress={() => this.redirect2Login('Notification')}>
-                                <Icon name='notifications' />
+                                <Icon name='message' />
                             </Button>
                         </Right>
                     </Header>
@@ -93,6 +93,7 @@ class MainScreen extends Component {
                                     <CardItem style={styles.view_card_bar_item}>
                                         <Icon name='location-on'/>
                                         <Text>{this.props.address}</Text>
+                                        <Icon name='search'/>
                                     </CardItem>
                                     <CardItem style={styles.view_card_bar_item}>
                                         <Text>剩余x把 距离xx米 步行x分钟</Text>
