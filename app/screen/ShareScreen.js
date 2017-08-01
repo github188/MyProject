@@ -3,7 +3,7 @@ import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Titl
 import getTheme from '../../native-base-theme/components';
 import mytheme from '../../native-base-theme/variables/mytheme'
 
-export default class ShareScreen extends Component {
+export default class SearchScreen extends Component {
     render() {
         return (
             <StyleProvider  style={getTheme(mytheme)}>
@@ -24,6 +24,14 @@ export default class ShareScreen extends Component {
                         </Right>
                     </Header>
                     <Content>
+                        <List>
+                            <ListItem>
+                                <Text>微信</Text>
+                            </ListItem>
+                            <ListItem>
+                                <Text>微博</Text>
+                            </ListItem>
+                        </List>
                     </Content>
                 </Container>
             </StyleProvider>

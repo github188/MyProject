@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, List, ListItem,Separator,StyleProvider,Drawer} from "native-base";
+import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, List, ListItem,Separator,StyleProvider} from "native-base";
 import getTheme from '../../native-base-theme/components';
 import mytheme from '../../native-base-theme/variables/mytheme'
-import MenuDrawerRouter from '../routers/MenuDrawerRouter';
 
 export default class MenuScreen extends Component {
     render() {
@@ -85,7 +84,7 @@ export default class MenuScreen extends Component {
                                     <Icon name="chevron-right" />
                                 </Right>
                             </ListItem>
-                            <ListItem icon onPress={() => MenuDrawerRouter.navigate('DrawerOpen')}>
+                            <ListItem icon onPress={() => this.props.navigation.navigate('Share')}>
                                 <Left>
                                     <Icon name="person-add"/>
                                 </Left>

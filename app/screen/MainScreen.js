@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import { Container, Header, Content, Footer, FooterTab, Body, Left, Right, Button, Text, Icon, Title,View,Fab,Card,CardItem ,StyleProvider} from "native-base";
+import { Container, Header, Content, Footer, FooterTab, Body, Left, Right, Button, Text, Icon, Title,View,Fab,Card,CardItem ,StyleProvider,Item,Input} from "native-base";
 import { MapView, MapTypes, MapModule, Geolocation } from 'react-native-baidu-map';
 import Dimensions from 'Dimensions';
 import { connect } from 'react-redux';
@@ -68,6 +68,9 @@ class MainScreen extends Component {
                             <Title alignSelf='center'>共享雨伞</Title>
                         </Body>
                         <Right>
+                            <Button transparent onPress={() => this.props.navigation.navigate('Search')}>
+                                <Icon name='search' />
+                            </Button>
                             <Button transparent onPress={() => this.redirect2Login('Notification')}>
                                 <Icon name='message' />
                             </Button>
@@ -90,11 +93,6 @@ class MainScreen extends Component {
                             </MapView>
                             <View style={styles.view_card_bar}>
                                 <Card>
-                                    <CardItem style={styles.view_card_bar_item}>
-                                        <Icon name='location-on'/>
-                                        <Text>{this.props.address}</Text>
-                                        <Icon name='search'/>
-                                    </CardItem>
                                     <CardItem style={styles.view_card_bar_item}>
                                         <Text>剩余x把 距离xx米 步行x分钟</Text>
                                     </CardItem>

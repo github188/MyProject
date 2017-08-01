@@ -2,7 +2,6 @@
 
 import { addNavigationHelpers,StackNavigator } from 'react-navigation';
 import React,{Component} from 'react';
-import { Root } from "native-base";
 import { connect } from 'react-redux';
 
 import MainScreen from '../screen/MainScreen';
@@ -17,6 +16,8 @@ import BorrowHistoryScreen from '../screen/BorrowHistoryScreen';
 import CouponScreen from '../screen/CouponScreen';
 import SettingScreen from '../screen/SettingScreen';
 import AboutScreen from '../screen/AboutScreen';
+import ShareScreen from '../screen/ShareScreen';
+import SearchScreen from '../screen/SearchScreen';
 
 export const MainStackNav = StackNavigator({
     Main: { screen: MainScreen },
@@ -31,15 +32,15 @@ export const MainStackNav = StackNavigator({
     Coupon : { screen :CouponScreen},
     Setting : { screen :SettingScreen},
     About : { screen :AboutScreen},
+    Share : { screen :ShareScreen},
+    Search:{ screen:SearchScreen},
 },{
     initialRouteName:'Main',
     headerMode: 'none'
 });
 
 const MainStackRouter = ({ dispatch, nav }) => (
-    <Root>
-        <MainStackNav navigation={addNavigationHelpers({ dispatch, state: nav })} />
-    </Root>
+    <MainStackNav navigation={addNavigationHelpers({ dispatch, state: nav })} />
 );
 
 const mapStateToProps = state => ({
