@@ -2,24 +2,12 @@ import React, { Component } from 'react';
 import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, List, ListItem,Separator,StyleProvider,Drawer} from "native-base";
 import getTheme from '../../native-base-theme/components';
 import mytheme from '../../native-base-theme/variables/mytheme'
-import ShareScreen from './ShareScreen';
+import MenuDrawerRouter from '../routers/MenuDrawerRouter';
 
 export default class MenuScreen extends Component {
-    closeDrawer = () => {
-        this.drawer._root.close()
-    };
-
-    openDrawer = () => {
-        this.drawer._root.open()
-    };
-
     render() {
         return (
         <StyleProvider  style={getTheme(mytheme)}>
-            <Drawer
-                ref={(ref) => { this.drawer = ref; }}
-                content={<ShareScreen navigator={this.navigator} />}
-                onClose={() => this.closeDrawer()} >
                 <Container>
                     <Header>
                         <Left>
@@ -97,7 +85,7 @@ export default class MenuScreen extends Component {
                                     <Icon name="chevron-right" />
                                 </Right>
                             </ListItem>
-                            <ListItem icon onPress={() => this.openDrawer()}>
+                            <ListItem icon onPress={() => MenuDrawerRouter.navigate('DrawerOpen')}>
                                 <Left>
                                     <Icon name="person-add"/>
                                 </Left>
@@ -122,7 +110,6 @@ export default class MenuScreen extends Component {
                         </List>
                     </Content>
                 </Container>
-            </Drawer>
         </StyleProvider>
         );
     }
