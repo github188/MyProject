@@ -6,27 +6,6 @@ import { StyleSheet,BackHandler,Platform } from 'react-native';
 
 class App extends Component {
 
-
-    componentWillMount(){
-        if (Platform.OS === 'android') {
-            BackHandler.addEventListener('hardwareBackPress', this._onBackAndroid);
-        }
-    }
-
-    componentWillUnmount() {
-        if (Platform.OS === 'android') {
-            BackHandler.removeEventListener('hardwareBackPress',() =>{});
-        }
-    }
-
-    _onBackAndroid = () => {
-        if (this.props.navigation) {
-            this.props.navigation.dispatch(NavigationActions.back());
-            return true;
-        }
-        return false;
-    }
-
     render(){
         return(
             <MainStackRouter/>

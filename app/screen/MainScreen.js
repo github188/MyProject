@@ -54,6 +54,30 @@ class MainScreen extends Component {
         };
       }
 
+    componentWillMount(){
+        if (Platform.OS === 'android') {
+            BackHandler.addEventListener('hardwareBackPress', this._onBackAndroid);
+        }
+    }
+
+    componentWillUnmount() {
+        if (Platform.OS === 'android') {
+            BackHandler.removeEventListener('hardwareBackPress',() =>{});
+        }
+    }
+
+    _onBackAndroid = () => {
+        console.log(this.props);
+        if (this.props.navigation) {
+            if (this.props.routes.length == 1){
+                return false;
+            }
+            this.props.navigation.dispatch(NavigationActions.back());
+            return true;
+        }
+        return false;
+    }
+
     render() {
         return (
             <StyleProvider  style={getTheme(mytheme)}>
@@ -164,11 +188,12 @@ class MainScreen extends Component {
 }
 
 function select(store){
-  return {
-    isLogin: store.user.isLogin,
-    center:store.location.center,
-    stores:store.location.stores,
-    address:store.location.address
+    return {
+        isLogin: store.user.isLogin,
+        center:store.location.center,
+        stores:store.location.stores,
+        address:store.location.address,
+        routes:store.nav.routes
   }
 }
 
