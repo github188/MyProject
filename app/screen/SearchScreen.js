@@ -10,14 +10,9 @@ export default class WalletScreen extends Component {
                 <Container>
                     <Header searchBar>
                         <Item>
-                            <Button transparent onPress={() => this.props.navigation.goBack()}>
-                                <Icon name='arrow-back' />
-                            </Button>
-                        </Item>
-                        <Item>
-                            <Icon name="search" onPress={() => console.log('search','')}/>
+                            <Icon name="arrow-back" onPress={() => this.props.navigation.goBack()}/>
                             <Input placeholder="Search" />
-                            <Icon name="location-on" />
+                            <Icon name="search" onPress={() => console.log('search','')}/>
                         </Item>
                     </Header>
                     <Content>

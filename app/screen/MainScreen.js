@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet,BackHandler,Platform } from 'react-native';
 import { Container, Header, Content, Footer, FooterTab, Body, Left, Right, Button, Text, Icon, Title,View,Fab,Card,CardItem ,StyleProvider,Item,Input} from "native-base";
 import { MapView, MapTypes, MapModule, Geolocation } from 'react-native-baidu-map';
 import Dimensions from 'Dimensions';
