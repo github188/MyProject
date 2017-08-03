@@ -75,7 +75,7 @@ export default class MenuScreen extends Component {
                             </ListItem>
                             <ListItem icon onPress={() => this.props.navigation.navigate('Setting')}>
                                 <Left>
-                                    <Icon name="build"/>
+                                    <Icon name="settings"/>
                                 </Left>
                                 <Body>
                                     <Text>设置</Text>

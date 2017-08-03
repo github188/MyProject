@@ -266,7 +266,7 @@ export default class QRScannerScreen extends Component {
                         <View style={styles.view_button_container}>
                             <View style={styles.view_button_container_sub}>
                                 <Button rounded onPress={() => this.props.navigation.navigate('QRInput')}>
-                                    <Icon name='power-input'/>
+                                    <Icon name='pan-tool'/>
                                 </Button>
                                 <Text style={{color:'white'}}>手动输入编号</Text>
                             </View>

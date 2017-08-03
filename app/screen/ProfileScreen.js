@@ -33,25 +33,25 @@ export default class ProfileScreen extends Component {
                                     <Text>头像</Text>
                                 </Body>
                                 <Right>
-                                    <Text>1.0</Text>
+                                    <Text></Text>
                                     <Icon name="chevron-right" />
                                 </Right>
                             </ListItem>
                             <ListItem icon onPress={() => this.props.navigation.navigate('Setting')}>
                                 <Left>
-                                    <Icon name="account-balance-wallet"/>
+                                    <Icon name="tag-faces"/>
                                 </Left>
                                 <Body>
                                     <Text>昵称</Text>
                                 </Body>
                                 <Right>
-                                    <Text>1.0</Text>
+                                    <Text></Text>
                                     <Icon name="chevron-right" />
                                 </Right>
                             </ListItem>
                             <ListItem icon onPress={() => this.props.navigation.navigate('Setting')}>
                                 <Left>
-                                    <Icon name="view-list"/>
+                                    <Icon name="person"/>
                                 </Left>
                                 <Body>
                                     <Text>姓名</Text>
@@ -62,7 +62,7 @@ export default class ProfileScreen extends Component {
                             </ListItem>
                             <ListItem icon onPress={() => this.props.navigation.navigate('Setting')}>
                                 <Left>
-                                    <Icon name="shopping-cart"/>
+                                    <Icon name="picture-in-picture"/>
                                 </Left>
                                 <Body>
                                     <Text>实名认证</Text>
@@ -73,7 +73,7 @@ export default class ProfileScreen extends Component {
                             </ListItem>
                             <ListItem icon onPress={() => this.props.navigation.navigate('Setting')}>
                                 <Left>
-                                    <Icon name="message"/>
+                                    <Icon name="phone-android"/>
                                 </Left>
                                 <Body>
                                     <Text>手机号</Text>
