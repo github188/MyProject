@@ -83,8 +83,8 @@ class LoginScreen extends Component {
                             <Text>获取验证码</Text>
                         </Button>
                     </View>
-                    <View style={{justifyContent: 'center',backgroundColor: 'powderblue'}}>
-                        <Button style={{flex:1}} onPress = {() =>{
+                    <View style={{justifyContent: 'center'}}>
+                        <Button block onPress = {() =>{
                             this.handleLogin();
                             this.props.navigation.dispatch({type:'Login',next:this.props.navigation.state.params.next});
                             }}>

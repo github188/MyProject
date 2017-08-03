@@ -1,5 +1,19 @@
 import React, { Component } from 'react';
+import {Image} from 'react-native';
+import { NavigationActions } from 'react-navigation';
 import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, Form, Item, Label, Input,View} from "native-base";
+
+const styles={
+    view_content:{
+        flex:1 ,
+    },
+    image:{
+        flex: 1,
+    },
+    form:{
+        flex: 3,
+    }
+}
 
 export default class QRInputScreen extends Component {
     render() {
@@ -7,7 +21,10 @@ export default class QRInputScreen extends Component {
             <Container>
                 <Header>
                     <Left>
-                        <Button transparent onPress={() => this.props.navigation.goBack()}>
+                        <Button transparent onPress={() => {
+                            console.log('input');
+                            this.props.navigation.dispatch(NavigationActions.back())
+                        }}>
                             <Icon name='arrow-back' />
                         </Button>
                     </Left>
@@ -20,21 +37,23 @@ export default class QRInputScreen extends Component {
                         </Button>
                     </Right>
                 </Header>
-                <Content style={{flex: 1}}>
-                    <Form style={{flex: 1}}>
-                        <Item regular>
-                            <Input placeholder='输入编号'/>
-                        </Item>
-                        <View style={{flex: 1,flexDirection: 'row',justifyContent: 'space-around'}}>
-                            <Button rounded>
-                                <Icon name='md-checkmark-circle'/>
-                            </Button>
-                            <Button rounded>
-                                <Icon name='md-bulb'/>
-                            </Button>
-                        </View>
-                    </Form>
-                </Content>
+                <View style={styles.view_content}>
+                    <Image source={require('../resource/image/shadow.png')} style={styles.image}/>
+                        <Form style={styles.form}>
+                            <Item floatingLabel>
+                                <Label>输入二维码下方的编号</Label>
+                                <Input/>
+                            </Item>
+                            <View style={{flexDirection: 'row',justifyContent: 'space-around'}}>
+                                <Button rounded>
+                                    <Icon name='md-checkmark-circle'/>
+                                </Button>
+                                <Button rounded>
+                                    <Icon name='md-bulb'/>
+                                </Button>
+                            </View>
+                        </Form>
+                </View>
             </Container>
         );
     }

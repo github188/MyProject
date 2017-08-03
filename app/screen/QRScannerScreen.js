@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet,View ,Animated,ActivityIndicator,Easing} from 'react-native';
 import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title,Toast,StyleProvider} from "native-base";
+import { NavigationActions } from 'react-navigation';
 import Camera from 'react-native-camera';
 import Dimensions from 'Dimensions';
 import getTheme from '../../native-base-theme/components';
@@ -238,7 +239,7 @@ export default class QRScannerScreen extends Component {
                 <Container>
                     <Header>
                         <Left>
-                            <Button transparent onPress={() => this.props.navigation.goBack()}>
+                            <Button transparent onPress={() => this.props.navigation.dispatch(NavigationActions.back())}>
                                 <Icon name='arrow-back' />
                             </Button>
                         </Left>

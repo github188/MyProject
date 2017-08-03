@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, List, ListItem,Separator,StyleProvider} from "native-base";
+import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title,List, ListItem,StyleProvider} from "native-base";
 import getTheme from '../../native-base-theme/components';
 import mytheme from '../../native-base-theme/variables/mytheme'
 
-export default class MenuScreen extends Component {
+export default class ProfileScreen extends Component {
     render() {
         return (
-        <StyleProvider  style={getTheme(mytheme)}>
+            <StyleProvider  style={getTheme(mytheme)}>
                 <Container>
                     <Header>
                         <Left>
@@ -15,7 +15,7 @@ export default class MenuScreen extends Component {
                             </Button>
                         </Left>
                         <Body>
-                            <Title>个人中心</Title>
+                            <Title>个人信息</Title>
                         </Body>
                         <Right>
                             <Button transparent>
@@ -25,49 +25,58 @@ export default class MenuScreen extends Component {
                     </Header>
                     <Content>
                         <List>
-                            <ListItem onPress={() => this.props.navigation.navigate('Profile')}>
-                                <Text>此处放头像</Text>
-                            </ListItem>
-                            <ListItem icon onPress={() => this.props.navigation.navigate('Wallet')}>
+                            <ListItem icon onPress={() => this.props.navigation.navigate('Setting')}>
                                 <Left>
-                                    <Icon name="account-balance-wallet"/>
+                                    <Icon name="face"/>
                                 </Left>
                                 <Body>
-                                    <Text>我的钱包</Text>
+                                    <Text>头像</Text>
                                 </Body>
                                 <Right>
                                     <Text>1.0</Text>
                                     <Icon name="chevron-right" />
                                 </Right>
                             </ListItem>
-                            <ListItem icon onPress={() => this.props.navigation.navigate('Borrow')}>
+                            <ListItem icon onPress={() => this.props.navigation.navigate('Setting')}>
+                                <Left>
+                                    <Icon name="account-balance-wallet"/>
+                                </Left>
+                                <Body>
+                                    <Text>昵称</Text>
+                                </Body>
+                                <Right>
+                                    <Text>1.0</Text>
+                                    <Icon name="chevron-right" />
+                                </Right>
+                            </ListItem>
+                            <ListItem icon onPress={() => this.props.navigation.navigate('Setting')}>
                                 <Left>
                                     <Icon name="view-list"/>
                                 </Left>
                                 <Body>
-                                    <Text>借伞记录</Text>
+                                    <Text>姓名</Text>
                                 </Body>
                                 <Right>
                                     <Icon name="chevron-right" />
                                 </Right>
                             </ListItem>
-                            <ListItem icon onPress={() => this.props.navigation.navigate('Coupon')}>
+                            <ListItem icon onPress={() => this.props.navigation.navigate('Setting')}>
                                 <Left>
                                     <Icon name="shopping-cart"/>
                                 </Left>
                                 <Body>
-                                    <Text>我的优惠</Text>
+                                    <Text>实名认证</Text>
                                 </Body>
                                 <Right>
                                     <Icon name="chevron-right" />
                                 </Right>
                             </ListItem>
-                            <ListItem icon onPress={() => this.props.navigation.navigate('Notification')}>
+                            <ListItem icon onPress={() => this.props.navigation.navigate('Setting')}>
                                 <Left>
                                     <Icon name="message"/>
                                 </Left>
                                 <Body>
-                                    <Text>消息</Text>
+                                    <Text>手机号</Text>
                                 </Body>
                                 <Right>
                                     <Icon name="chevron-right" />
@@ -78,29 +87,7 @@ export default class MenuScreen extends Component {
                                     <Icon name="build"/>
                                 </Left>
                                 <Body>
-                                    <Text>设置</Text>
-                                </Body>
-                                <Right>
-                                    <Icon name="chevron-right" />
-                                </Right>
-                            </ListItem>
-                            <ListItem icon onPress={() => this.props.navigation.navigate('Share')}>
-                                <Left>
-                                    <Icon name="person-add"/>
-                                </Left>
-                                <Body>
-                                    <Text>邀请</Text>
-                                </Body>
-                                <Right>
-                                    <Icon name="chevron-right" />
-                                </Right>
-                            </ListItem>
-                            <ListItem icon onPress={() => this.props.navigation.navigate('About')}>
-                                <Left>
-                                    <Icon name="beach-access"/>
-                                </Left>
-                                <Body>
-                                    <Text>关于</Text>
+                                    <Text>电信用户</Text>
                                 </Body>
                                 <Right>
                                     <Icon name="chevron-right" />
@@ -109,7 +96,7 @@ export default class MenuScreen extends Component {
                         </List>
                     </Content>
                 </Container>
-        </StyleProvider>
+            </StyleProvider>
         );
     }
 }

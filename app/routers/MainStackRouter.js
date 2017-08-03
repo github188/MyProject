@@ -9,6 +9,7 @@ import MenuScreen from '../screen/MenuScreen';
 import NotificationScreen from '../screen/NotificationScreen';
 import QRScannerScreen from '../screen/QRScannerScreen';
 import QRInputScreen from '../screen/QRInputScreen';
+import QRTabRouter from './QRTabRouter';
 import LoginScreen from '../screen/LoginScreen';
 import PaymentScreen from '../screen/PaymentScreen';
 import WalletScreen from '../screen/WalletScreen';
@@ -18,6 +19,7 @@ import SettingScreen from '../screen/SettingScreen';
 import AboutScreen from '../screen/AboutScreen';
 import ShareScreen from '../screen/ShareScreen';
 import SearchScreen from '../screen/SearchScreen';
+import ProfileScreen from '../screen/ProfileScreen';
 
 export const MainStackNav = StackNavigator({
     Main: { screen: MainScreen },
@@ -25,6 +27,7 @@ export const MainStackNav = StackNavigator({
     Notification: { screen: NotificationScreen },
     QRScanner: { screen: QRScannerScreen },
     QRInput: { screen: QRInputScreen },
+    QRTab: { screen: QRTabRouter },
     Login : { screen:LoginScreen},
     Payment : { screen :PaymentScreen},
     Wallet : { screen:WalletScreen},
@@ -34,6 +37,7 @@ export const MainStackNav = StackNavigator({
     About : { screen :AboutScreen},
     Share : { screen :ShareScreen},
     Search:{ screen:SearchScreen},
+    Profile: { screen:ProfileScreen},
 },{
     initialRouteName:'Main',
     headerMode: 'none'
