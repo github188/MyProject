@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title,List, ListItem,StyleProvider} from "native-base";
+import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title,List, ListItem,StyleProvider,Thumbnail} from "native-base";
 import getTheme from '../../native-base-theme/components';
 import mytheme from '../../native-base-theme/variables/mytheme'
+
+const phoneNumber='18017460257'
 
 export default class ProfileScreen extends Component {
     render() {
@@ -32,8 +34,8 @@ export default class ProfileScreen extends Component {
                                 <Body>
                                     <Text>头像</Text>
                                 </Body>
+                                <Thumbnail source={require('../resource/image/default_face.png')} />
                                 <Right>
-                                    <Text></Text>
                                     <Icon name="chevron-right" />
                                 </Right>
                             </ListItem>
@@ -68,7 +70,7 @@ export default class ProfileScreen extends Component {
                                     <Text>实名认证</Text>
                                 </Body>
                                 <Right>
-                                    <Icon name="chevron-right" />
+                                    <Text>已认证</Text>
                                 </Right>
                             </ListItem>
                             <ListItem icon onPress={() => this.props.navigation.navigate('Setting')}>
@@ -79,6 +81,7 @@ export default class ProfileScreen extends Component {
                                     <Text>手机号</Text>
                                 </Body>
                                 <Right>
+                                    <Text>{phoneNumber}</Text>
                                     <Icon name="chevron-right" />
                                 </Right>
                             </ListItem>
@@ -90,6 +93,7 @@ export default class ProfileScreen extends Component {
                                     <Text>电信用户</Text>
                                 </Body>
                                 <Right>
+                                    <Text>未绑定</Text>
                                     <Icon name="chevron-right" />
                                 </Right>
                             </ListItem>

@@ -10,9 +10,11 @@ class LoginScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-          selected: "+86",
-          username: null,
-          veriCode: null,
+            selected: "+86",
+            username: null,
+            veriCode: null,
+            commitDisabled:true,
+            veriDisabled:true,
         };
         this.onChangeName = this.onChangeName.bind(this);
         this.onChangeVeriCode = this.onChangeVeriCode.bind(this);
@@ -26,10 +28,23 @@ class LoginScreen extends Component {
 
     onChangeName(text){
         this.setState({username: text});
+        if (/^\d{11}$/.test(text)){
+            this.setState({veriDisabled: false});
+        }
+        else{
+            this.setState({veriDisabled: true});
+            this.setState({commitDisabled: true});
+        }
     }
 
     onChangeVeriCode(text){
         this.setState({veriCode: text});
+        if (/^\d{6}$/.test(text) && /^\d{11}$/.test(this.state.username)){
+            this.setState({commitDisabled: false});
+        }
+        else{
+            this.setState({commitDisabled: true});
+        }
     }
 
     handleLogin(){
@@ -62,7 +77,7 @@ class LoginScreen extends Component {
                     </Right>
                 </Header>
                 <Content>
-                    <View style={{flexDirection: 'row',justifyContent: 'space-between',}}>
+                    <View style={{flexDirection: 'row',justifyContent: 'space-between',alignItems: 'center',margin:10}}>
                         <Picker style={{flex:1}}
                             iosHeader="Select one"
                             mode="dropdown"
@@ -71,20 +86,21 @@ class LoginScreen extends Component {
                         >
                             <Item label="+86" value="+86" />
                         </Picker>
-                        <Item regular style={{flex:2}}>
+                        <Item regular style={{flex:2.5}}>
                             <Input placeholder='请输入手机号' onChangeText={this.onChangeName} />
                         </Item>
                     </View>
-                    <View style={{flexDirection: 'row',justifyContent: 'space-between',}}>
-                        <Item regular style={{flex:1}}>
+                    <View style={{flexDirection: 'row',justifyContent: 'space-between',alignItems: 'center',margin:10}}>
+                        <Text style={{flex:1}}>验证码</Text>
+                        <Item regular style={{flex:1.5}}>
                             <Input placeholder='请输入验证码' onChangeText={this.onChangeVeriCode}/>
                         </Item>
-                        <Button>
+                        <Button disabled = {this.state.veriDisabled}>
                             <Text>获取验证码</Text>
                         </Button>
                     </View>
-                    <View style={{justifyContent: 'center'}}>
-                        <Button block onPress = {() =>{
+                    <View style={{justifyContent: 'center',margin:10}}>
+                        <Button block disabled = {this.state.commitDisabled}  onPress = {() =>{
                             this.handleLogin();
                             this.props.navigation.dispatch({type:'Login',next:this.props.navigation.state.params.next});
                             }}>

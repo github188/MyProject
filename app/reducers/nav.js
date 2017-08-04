@@ -5,6 +5,7 @@ export default function nav(state, action) {
     let nextState;
     switch (action.type) {
         case 'Login':
+            console.log('nav.login');
             nextState = MainStackNav.router.getStateForAction(
                 NavigationActions.back(),
                 state
@@ -17,10 +18,15 @@ export default function nav(state, action) {
             }
             break;
         case 'Logout':
-            nextState = MainStackNav.router.getStateForAction(
-                NavigationActions.navigate({ routeName: 'Login' }),
-                state
-            );
+            console.log('nav.logout');
+            console.log(state);
+            while (state.index>0){
+                nextState = MainStackNav.router.getStateForAction(
+                    NavigationActions.back(),
+                    state
+                );
+                state=nextState;
+            };
             break;
         default:
             nextState = MainStackNav.router.getStateForAction(action, state);

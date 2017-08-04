@@ -324,11 +324,11 @@ export default (variables = variable) => {
         },
         "NativeBase.Icon": {
           width: variables.iconFontSize - 5,
-          fontSize: variables.iconFontSize - 2
+          fontSize: variables.iconFontSize - 5
         },
         "NativeBase.IconNB": {
           width: variables.iconFontSize - 5,
-          fontSize: variables.iconFontSize - 2
+          fontSize: variables.iconFontSize - 5
         },
         paddingRight: variables.listItemPadding + 5,
         flex: 0,
