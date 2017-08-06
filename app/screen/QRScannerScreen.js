@@ -233,6 +233,9 @@ class QRScannerMaskView extends Component{
 
 
 export default class QRScannerScreen extends Component {
+
+
+
     render() {
         return (
             <StyleProvider  style={getTheme(mytheme)}>

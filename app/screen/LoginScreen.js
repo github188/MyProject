@@ -58,6 +58,16 @@ class LoginScreen extends Component {
         console.log('',)
     }
 
+    shouldComponentUpdate(nextProps, nextState)
+    {
+        // 登录完成，且成功登录
+        if (nextProps.status === 'loginDone' && nextProps.isLogin) {
+            this.props.navigation.dispatch({type:'Login',next:this.props.navigation.state.params.next});
+            return false;
+        }
+        return true;
+    }
+
     render() {
         return (
             <Container>
@@ -102,7 +112,6 @@ class LoginScreen extends Component {
                     <View style={{justifyContent: 'center',margin:10}}>
                         <Button block disabled = {this.state.commitDisabled}  onPress = {() =>{
                             this.handleLogin();
-                            this.props.navigation.dispatch({type:'Login',next:this.props.navigation.state.params.next});
                             }}>
                             <Text>确定</Text>
                         </Button>

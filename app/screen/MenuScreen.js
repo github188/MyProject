@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
 import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, List, ListItem,Separator,StyleProvider,Thumbnail,View} from "native-base";
 import getTheme from '../../native-base-theme/components';
-import mytheme from '../../native-base-theme/variables/mytheme'
+import mytheme from '../../native-base-theme/variables/mytheme';
+import { connect } from 'react-redux';
 
-export default class MenuScreen extends Component {
+class MenuScreen extends Component {
+
+    getPhoneNumberD(phone){
+        if (phone)
+            {return phone.substring(0,3)+'****'+phone.substring(7);}
+        else
+            {return '***********';}
+    }
+
     render() {
         return (
         <StyleProvider  style={getTheme(mytheme)}>
@@ -29,7 +38,7 @@ export default class MenuScreen extends Component {
                                 <View style={{flex:1,justifyContent: 'space-around',alignItems: 'center'}}>
                                     <Thumbnail large source={require('../resource/image/default_face.png')} />
                                     <Text> </Text>
-                                    <Text>189****0257</Text>
+                                    <Text>{this.getPhoneNumberD(this.props.user.name)}</Text>
                                     <Text>  </Text>
                                     <Button bordered small><Text>电信用户</Text></Button>
                                 </View>
@@ -119,3 +128,11 @@ export default class MenuScreen extends Component {
         );
     }
 }
+
+function select(store){
+    return {
+        user: store.user.user,
+  }
+}
+
+export default connect(select)(MenuScreen);
