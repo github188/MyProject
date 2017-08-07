@@ -45,7 +45,7 @@ export default class QRInputScreen extends Component {
                                 <Input/>
                             </Item>
                             <View style={{flexDirection: 'row',justifyContent: 'space-around'}}>
-                                <Button rounded>
+                                <Button rounded onPress  = { () => this.props.navigation.navigate('Payment')}>
                                     <Icon name='md-checkmark-circle'/>
                                 </Button>
                                 <Button rounded>
