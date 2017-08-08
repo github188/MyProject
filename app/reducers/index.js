@@ -9,6 +9,7 @@ const rootReducer = combineReducers({
   user,
   nav,
   location,
+  payment,
 });
 
 export default rootReducer;
