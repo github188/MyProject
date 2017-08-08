@@ -35,7 +35,7 @@ export default function user(state=initialState,action){
 
         case types.CONFIRM_SUCCESS:
             return{...state,
-                    status:'confirmed'
+                    status:'confirmed',
                     startTime:'20170808'
             };
 
@@ -52,7 +52,7 @@ export default function user(state=initialState,action){
 
         case types.CONFIRM_SUCCESS:
             return{...state,
-                    status:'confirmed'
+                    status:'confirmed',
                     startTime:'20170808'
             };
 
