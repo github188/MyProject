@@ -3,9 +3,8 @@
 import * as types from '../actions/types';
 
 const initialState={
-    startTime:null,
-    endTime:null,
     status:null,
+    startTime:null,
     payMethod:null,
 };
 
@@ -13,13 +12,13 @@ export default function user(state=initialState,action){
     switch(action.type){
         case types.PREPAY_DOING:
             return{...state,
-                    status:'prepaying'
+                    status:'paying'
             };
 
         case types.PREPAY_SUCCESS:
             return{...state,
                     payMethod:action.payMethod,
-                    status:'prepayed'
+                    status:'paid'
             };
 
         case types.PREPAY_ERROR:
@@ -45,18 +44,18 @@ export default function user(state=initialState,action){
                     payMethod:null,
             };
 
-        case types.CONFIRM_DOING:
+        case types.REFUND_DOING:
             return{...state,
-                    status:'confirming'
+                    status:'refunding'
             };
 
-        case types.CONFIRM_SUCCESS:
+        case types.REFUND_SUCCESS:
             return{...state,
-                    status:'confirmed',
-                    startTime:'20170808'
+                    status:null,
+                    startTime:null,
             };
 
-        case types.CONFIRM_ERROR:
+        case types.REFUND_ERROR:
             return{...state,
                     status:null,
                     payMethod:null,

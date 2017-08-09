@@ -6,12 +6,12 @@ export function pay(opt){
         dispatch({type: types.PAY_DOING});
         let result = fetch('http://www.baidu.com')
             .then((res)=>{
-                dispatch({type: types.PAY_SUCCESS, result: true, payMethod:opt.payMethod);
-            })
+                dispatch({type: types.PAY_SUCCESS, result: true, payMethod:opt});
+                })
             .catch((e)=>{
                 dispatch({type: types.PAY_ERROR, result:false, error:e});
             });
-    }
+            }
 }
 
 export function confirm(){
@@ -19,7 +19,7 @@ export function confirm(){
         dispatch({type: types.CONFIRM_DOING});
         let result = fetch('http://www.baidu.com')
             .then((res)=>{
-                dispatch({type: types.CONFIRM_SUCCESS, result: true);
+                dispatch({type: types.CONFIRM_SUCCESS, result: true});
             })
             .catch((e)=>{
                 dispatch({type: types.CONFIRM_ERROR, result:false, error:e});
@@ -29,13 +29,13 @@ export function confirm(){
 
 export function refund(){
     return dispatch => {
-        dispatch({type: types.PREPAY_DOING});
+        dispatch({type: types.REFUND_DOING});
         let result = fetch('http://www.baidu.com')
             .then((res)=>{
-                dispatch({type: types.PREPAY_SUCCESS, result: true, payMethod:opt.payMethod);
+                dispatch({type: types.REFUND_SUCCESS, result: true, payMethod:opt});
             })
             .catch((e)=>{
-                dispatch({type: types.PREPAY_ERROR, result:false, error:e});
+                dispatch({type: types.REFUND_ERROR, result:false, error:e});
             });
     }
 }

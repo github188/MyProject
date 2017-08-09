@@ -1,12 +1,28 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title,List, ListItem,StyleProvider,View,Radio} from "native-base";
+import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title,List, ListItem,StyleProvider,View,CheckBox} from "native-base";
 import getTheme from '../../native-base-theme/components';
 import mytheme from '../../native-base-theme/variables/mytheme';
 import { RadioButtons } from 'react-native-radio-buttons';
+import {connect} from 'react-redux';
+import {payment} from '../actions/payment'
 
-export default class PaymentScreen extends Component {
+class PaymentScreen extends Component {
 
-    state = {}
+    state = {checkListOption:null}
+
+    handlePayment(){
+        console.log('',checkListOption)
+        this.props.dispatch(pay(checkListOption));
+    }
+
+    shouldComponentUpdate(nextProps, nextState)
+    {
+        if (nextProps.status === 'paid') {
+            this.props.navigation.navigate('Confirm');
+            return false;
+        }
+        return true;
+    }
 
     render() {
 
@@ -19,11 +35,21 @@ export default class PaymentScreen extends Component {
         }
 
         function renderOption( option, selected, onSelect, index) {
+            var checkMark;
+            if (selected){
+                 checkMark = <Icon name="radio-button-checked" />;
+            }
+            else{
+                checkMark = <Icon name="radio-button-unchecked" />;
+            }
+
+
+
             return (
-            <ListItem key={index}>
+            <ListItem onPress={onSelect} key={index}>
                 <Text>{option}</Text>
                 <Right>
-                    <Radio selected={selected} onPress={onSelect} key={index}/>
+                    {checkMark}
                 </Right>
             </ListItem>
           );
@@ -63,10 +89,19 @@ export default class PaymentScreen extends Component {
                             renderOption={ renderOption }
                             renderContainer={ renderContainer }
                         />
-                        <Text>Selected payment: {this.state.checkListOption || 'none'}</Text>
+                        <Button onPress = { () => this.handlePayment()} >支付</Button>
                     </Content>
                 </Container>
             </StyleProvider>
         );
     }
 }
+
+function select(store){
+    return {
+        status: store.payment.status,
+    }
+}
+
+
+export default connect(select)(PaymentScreen);

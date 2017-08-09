@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet,View ,Animated,ActivityIndicator,Easing} from 'react-native';
+import { StyleSheet,View ,Animated,ActivityIndicator,Easing,ToastAndroid} from 'react-native';
 import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title,Toast,StyleProvider} from "native-base";
 import { NavigationActions } from 'react-navigation';
 import Camera from 'react-native-camera';
@@ -234,9 +234,7 @@ class QRScannerMaskView extends Component{
 
 export default class QRScannerScreen extends Component {
 
-
-
-    render() {
+     render() {
         return (
             <StyleProvider  style={getTheme(mytheme)}>
                 <Container>
@@ -287,13 +285,23 @@ export default class QRScannerScreen extends Component {
     }
 
     readQR(e) {
-        //do sth
-        Toast.show({
-                          text: e.data,
-                          position: 'bottom',
-                          buttonText: 'OK'
-                        })
+        ToastAndroid.showWithGravity(
+                        e.data,
+                        ToastAndroid.SHORT,
+                        ToastAndroid.CENTER,
+                      )
         console.log('e',e.data);
+        let result = fetch('http://www.baidu.com')
+            .then((res)=>{
+                    ToastAndroid.showWithGravity(
+                                            'navigate',
+                                            ToastAndroid.SHORT,
+                                            ToastAndroid.CENTER,
+                                          )
+                    this.props.navigation.navigate('Payment');
+                })
+            .catch((e)=>{
+                });
     }
 }
 

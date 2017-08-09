@@ -28,6 +28,17 @@ export default function nav(state, action) {
                 state=nextState;
             };
             break;
+        case 'Return2Main':
+            console.log('nav.Return2Main');
+            console.log(state);
+            while (state.index>0){
+                nextState = MainStackNav.router.getStateForAction(
+                    NavigationActions.back(),
+                    state
+                );
+                state=nextState;
+            };
+            break;
         default:
             nextState = MainStackNav.router.getStateForAction(action, state);
             break;

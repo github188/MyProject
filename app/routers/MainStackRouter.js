@@ -20,6 +20,7 @@ import AboutScreen from '../screen/AboutScreen';
 import ShareScreen from '../screen/ShareScreen';
 import SearchScreen from '../screen/SearchScreen';
 import ProfileScreen from '../screen/ProfileScreen';
+import ConfirmScreen from '../screen/ConfirmScreen';
 
 export const MainStackNav = StackNavigator({
     Main: { screen: MainScreen },
@@ -38,6 +39,7 @@ export const MainStackNav = StackNavigator({
     Share : { screen :ShareScreen},
     Search:{ screen:SearchScreen},
     Profile: { screen:ProfileScreen},
+    Confirm: { screnn: ConfirmScreen},
 },{
     initialRouteName:'Main',
     headerMode: 'none'
