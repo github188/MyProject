@@ -5,7 +5,7 @@ import mytheme from '../../native-base-theme/variables/mytheme'
 import { NavigationActions } from 'react-navigation';
 import {connect} from 'react-redux';
 import {refund} from '../actions/payment';
-import {CountDown} from '../utils/CountDown';
+import CountDown from '../utils/CountDown';
 
 class ConfirmScreen extends Component {
 
@@ -46,11 +46,11 @@ class ConfirmScreen extends Component {
                         <Text>将雨伞交给营业员解锁</Text>
                         <View>
                             <CountDown
-                                beginText='什么鬼'
+                                beginText='00:00'
                                 endText='请重新扫码'
                                 count={300}
-                                pressAction={()=>{this.countDown.startCountDown()}}
-                                changeWithCount={(count)=> count/60 + ':'+count % 60}
+                                auto={true}
+                                changeWithCount={(count)=> ('0'+Math.floor(count / 60)).substr(-2) + ':'+ ('0'+count % 60).substr(-2)}
                                 id='confirmCD'
                                 ref={(e)=>{this.countDown=e}}
                             />

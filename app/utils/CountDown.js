@@ -17,24 +17,23 @@ export default class CountDown extends Component {
 
     static propTypes = {
         id:React.PropTypes.string,          //按钮的身份标识,同一个页面的按钮是同一个id
-        beginText:React.PropTypes.string,   //初始状态按钮title
-        endText:React.PropTypes.string,     //读秒结束后按钮的title
+        beginText:React.PropTypes.string,   //初始状态文字
+        endText:React.PropTypes.string,     //读秒结束后文字
         count:React.PropTypes.number,       //计时数
-        auto:React.PropTypes.boolean,
+        auto:React.PropTypes.bool,
         pressAction:React.PropTypes.func,   //按下按钮的事件,但是触发倒数需要你自己来调用方法
         changeWithCount:React.PropTypes.func,   //读秒变化的函数,该函数带有一个参数count,表示当前的剩余事件
         end:React.PropTypes.func,           //读秒完毕后的函数
     }
 
     componentWillMount() {
-        this.shouldSetState = true;
         this.state = {
             timer:this.props.beginText,
         }
     }
 
     componentDidMount() {
-        const {id,changeWithCount} = this.props;
+        const {id,changeWithCount,auto} = this.props;
         for(var i = 0 ; i<timeRecodes.length ; i ++){
             let obj = timeRecodes[i];
             if (obj.id == id){
@@ -47,26 +46,23 @@ export default class CountDown extends Component {
                         timer:content
                     });
                     //手动调用倒计时
-                    this.startCountDownWithCount(obj.startTime)
+                    this.startCountDownWithCount(obj.startTime);
+
                 }
+                return;
             }
         }
-
-    }
-
-    clearTime(){
-        if (this.interval){
-            clearInterval(this.interval)
+        if (auto){
+            console.log('start timer')
+            this.startCountDown();
         }
     }
 
     componentWillUnmount() {
-        this.shouldSetState = false;
-        this.clearTime();
+        this.interval && clearInterval(this.interval)
     }
 
     startCountDownWithCount(startTime){
-        this.buttonState = LCCountDownButtonState.LCCountDownButtonDisable;
         const {changeWithCount,endText,count,end}= this.props;
         this.startTime = startTime;
         this.interval = setInterval(()=>{
@@ -74,15 +70,12 @@ export default class CountDown extends Component {
             let content = changeWithCount(count - detalTime);
             if (detalTime >= count){
                 content = endText;
-                this.clearTime();
+                this.interval && clearInterval(this.interval)
                 end && end();
-                this.buttonState = LCCountDownButtonState.LCCountDownButtonActive;
             }
-            if(this.shouldSetState){
-                this.setState({
-                    btnTitle:content
-                })
-            }
+            this.setState({
+                timer:content
+            })
         },1000)
     }
 
