@@ -4,15 +4,21 @@ import getTheme from '../../native-base-theme/components';
 import mytheme from '../../native-base-theme/variables/mytheme';
 import { RadioButtons } from 'react-native-radio-buttons';
 import {connect} from 'react-redux';
-import {payment} from '../actions/payment'
+import {pay} from '../actions/payment'
 
 class PaymentScreen extends Component {
 
     state = {checkListOption:null}
 
     handlePayment(){
-        console.log('',checkListOption)
-        this.props.dispatch(pay(checkListOption));
+        if (this.state.checkListOption){
+            console.log('checkListOption',this.state.checkListOption);
+            this.props.dispatch(pay(this.state.checkListOption));
+        }
+        else{
+            console.log('checkListOption','please select a method');
+        }
+
     }
 
     shouldComponentUpdate(nextProps, nextState)
@@ -30,7 +36,7 @@ class PaymentScreen extends Component {
 
         function setSelectedOption(checkListOption){
             this.setState({
-            checkListOption,
+                checkListOption,
             });
         }
 
@@ -89,7 +95,9 @@ class PaymentScreen extends Component {
                             renderOption={ renderOption }
                             renderContainer={ renderContainer }
                         />
-                        <Button onPress = { () => this.handlePayment()} >支付</Button>
+                        <Button onPress = { () => this.handlePayment()} >
+                            <Text>支付</Text>
+                         </Button>
                     </Content>
                 </Container>
             </StyleProvider>

@@ -39,7 +39,7 @@ export const MainStackNav = StackNavigator({
     Share : { screen :ShareScreen},
     Search:{ screen:SearchScreen},
     Profile: { screen:ProfileScreen},
-    Confirm: { screnn: ConfirmScreen},
+    Confirm: { screen: ConfirmScreen},
 },{
     initialRouteName:'Main',
     headerMode: 'none'

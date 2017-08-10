@@ -8,20 +8,20 @@ const initialState={
     payMethod:null,
 };
 
-export default function user(state=initialState,action){
+export default function payment(state=initialState,action){
     switch(action.type){
-        case types.PREPAY_DOING:
+        case types.PAY_DOING:
             return{...state,
                     status:'paying'
             };
 
-        case types.PREPAY_SUCCESS:
+        case types.PAY_SUCCESS:
             return{...state,
                     payMethod:action.payMethod,
                     status:'paid'
             };
 
-        case types.PREPAY_ERROR:
+        case types.PAY_ERROR:
             return{...state,
                     payMethod:null,
                     status:null
@@ -51,7 +51,7 @@ export default function user(state=initialState,action){
 
         case types.REFUND_SUCCESS:
             return{...state,
-                    status:null,
+                    status:'refunded',
                     startTime:null,
             };
 

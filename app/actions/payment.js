@@ -32,7 +32,7 @@ export function refund(){
         dispatch({type: types.REFUND_DOING});
         let result = fetch('http://www.baidu.com')
             .then((res)=>{
-                dispatch({type: types.REFUND_SUCCESS, result: true, payMethod:opt});
+                dispatch({type: types.REFUND_SUCCESS, result: true});
             })
             .catch((e)=>{
                 dispatch({type: types.REFUND_ERROR, result:false, error:e});
