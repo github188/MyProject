@@ -17,14 +17,14 @@ export default function locate(state=initialState,action){
     switch(action.type){
         case types.LOCATING:
             return{...state,
-                    status:'doing'
+                    status:'locating'
             };
 
         case types.LOCATE_SUCCESS:
             return{...state,
                     center:action.center,
                     address:action.address,
-                    status:'done'
+                    status:'located'
             };
 
         case types.LOCATE_ERROR:
@@ -34,7 +34,7 @@ export default function locate(state=initialState,action){
 
         case types.LOCATING_STORE:
             return{...state,
-                    status:'doing'
+                    status:'locatingStore'
             };
 
         case types.LOCATE_STORE_SUCCESS:

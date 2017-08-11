@@ -12,12 +12,33 @@ const test_store=[{
     title: '全家五道口店 剩余2把',
     icon: 'icon_umbrella'}];
 
+function handleStores(stores){
+    let result = new Array();
+    console.log('get stores',stores.length)
+    for (var i =0;i<stores.length;i++){
+        let store = stores[i];
+        result[i]={latitude:store.y,longitude:store.x,title:store.shopname+','+store.shopaddress+',剩余'+store.count+'把',icon:'icon_umbrella' }
+    }
+    return result;
+}
+
 export function getStoreLocation(opt){
-    console.log(opt);
+    console.log('locat store',opt);
     return dispatch => {
         dispatch({type: types.LOCATING_STORE});
-        let result = fetch('http://www.baidu.com').then((res) => {
-        dispatch({type: types.LOCATE_STORE_SUCCESS, stores: test_store});
+        let result = fetch('http://192.168.137.1:9090/phone/nearshops', {
+                       method: 'POST',
+                       headers: {
+                         'Content-Type': 'application/json;charset=utf-8',
+                       },
+                       body: JSON.stringify({
+                           x: opt.longitude,
+                           y: opt.latitude,
+                           metre: '500'
+                       })
+                     }).then((res)=>res.json()).then((resJson) => {
+                     console.log('response stores',resJson)
+        dispatch({type: types.LOCATE_STORE_SUCCESS, stores: handleStores(resJson)});
         }).catch(e =>{
             dispatch({type: types.LOCATE_STORE_ERROR, error:e});
         })

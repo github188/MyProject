@@ -47,12 +47,21 @@ class MainScreen extends Component {
 
     constructor(props){
         super(props);
-        this.refreshCurrentPosition();
+        this.props.dispatch(getCurrentLocation());
         this.state = {
             mapType: MapTypes.NORMAL,
             zoom: 18,
         };
       }
+
+    shouldComponentUpdate(nextProps, nextState)
+        {
+            if (nextProps.status === 'located') {
+                this.props.dispatch(getStoreLocation(nextProps.center));
+                return false;
+            }
+            return true;
+        }
 
     componentWillMount(){
         if (Platform.OS === 'android') {
@@ -151,7 +160,7 @@ class MainScreen extends Component {
 
     refreshCurrentPosition(){
         this.props.dispatch(getCurrentLocation());
-        this.props.dispatch(getStoreLocation(this.props.center));
+        //this.props.dispatch(getStoreLocation(this.props.center));
     }
 
     /*setCurrentPosition(){
@@ -193,7 +202,8 @@ function select(store){
         center:store.location.center,
         stores:store.location.stores,
         address:store.location.address,
-        routes:store.nav.routes
+        routes:store.nav.routes,
+        status:store.location.status,
   }
 }
 
