@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { StyleSheet,View ,Animated,ActivityIndicator,Easing,ToastAndroid} from 'react-native';
-import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title,Toast,StyleProvider} from "native-base";
+import { View ,Animated, Easing, ToastAndroid} from 'react-native';
+import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, StyleProvider} from "native-base";
 import { NavigationActions } from 'react-navigation';
 import Camera from 'react-native-camera';
 import Dimensions from 'Dimensions';
@@ -98,6 +98,7 @@ const styles = {
     }
 };
 
+//照相机组件
 class QRScannerMaskView extends Component{
     static defaultProps = {
         maskColor: '#ffffff4C',
@@ -129,16 +130,6 @@ class QRScannerMaskView extends Component{
     getTopHeight(){
         return (this.state.totalHeight - this.props.rectHeight)/2
     }
-
-    /*renderLoadingIndicator() {
-        return (
-            <ActivityIndicator
-                animating={true}
-                color={'#3F51B5'}
-                size='large'
-            />
-        );
-    }*/
 
     render() {
         const animatedStyle = {
@@ -231,7 +222,7 @@ class QRScannerMaskView extends Component{
     }
 }
 
-
+//二维码扫描组件
 export default class QRScannerScreen extends Component {
 
      render() {
@@ -284,6 +275,7 @@ export default class QRScannerScreen extends Component {
         );
     }
 
+    //读取二维码操作
     readQR(e) {
         ToastAndroid.showWithGravity(
                         e.data,

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title,List, ListItem,StyleProvider,View} from "native-base";
+import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, StyleProvider, View} from "native-base";
 import getTheme from '../../native-base-theme/components';
 import mytheme from '../../native-base-theme/variables/mytheme'
 import { NavigationActions } from 'react-navigation';
-import {connect} from 'react-redux';
-import {refund} from '../actions/payment';
+import { connect} from 'react-redux';
+import { refund} from '../actions/payment';
 import CountDown from '../utils/CountDown';
 
+//店员确认组件
 class ConfirmScreen extends Component {
 
     handleRefund(){

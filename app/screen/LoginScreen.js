@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { StyleSheet } from 'react-native';
-import { Container, Header, Content, Footer, FooterTab, Body, Left, Right, Button, Text, Icon, Title,View,Input,Item,Picker } from "native-base";
-import Dimensions from 'Dimensions';
-import {connect} from 'react-redux';
-import {login} from '../actions/user'
+import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, View, Input,Item ,Picker } from "native-base";
+import { connect} from 'react-redux';
+import { login} from '../actions/user'
 import { NavigationActions } from 'react-navigation'
 
+//登录组件
 class LoginScreen extends Component {
     constructor(props) {
         super(props);
@@ -26,6 +25,7 @@ class LoginScreen extends Component {
         });
     }
 
+    //用户名校验 必须是手机
     onChangeName(text){
         this.setState({username: text});
         if (/^\d{11}$/.test(text)){
@@ -37,6 +37,7 @@ class LoginScreen extends Component {
         }
     }
 
+    //验证码输入校验
     onChangeVeriCode(text){
         this.setState({veriCode: text});
         if (/^\d{6}$/.test(text) && /^\d{11}$/.test(this.state.username)){
@@ -47,6 +48,7 @@ class LoginScreen extends Component {
         }
     }
 
+    //登录处理
     handleLogin(){
         if(!this.state.username || !this.state.veriCode){
             return;

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title,List, ListItem,StyleProvider,Thumbnail} from "native-base";
+import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, List, ListItem, StyleProvider, Thumbnail} from "native-base";
 import getTheme from '../../native-base-theme/components';
 import mytheme from '../../native-base-theme/variables/mytheme'
+import { connect } from 'react-redux';
 
-const phoneNumber='18017460257'
-
-export default class ProfileScreen extends Component {
+//个人信息组件
+class ProfileScreen extends Component {
     render() {
         return (
             <StyleProvider  style={getTheme(mytheme)}>
@@ -81,7 +81,7 @@ export default class ProfileScreen extends Component {
                                     <Text>手机号</Text>
                                 </Body>
                                 <Right>
-                                    <Text>{phoneNumber}</Text>
+                                    <Text>{this.props.user.name}</Text>
                                     <Icon name="chevron-right" />
                                 </Right>
                             </ListItem>
@@ -104,3 +104,11 @@ export default class ProfileScreen extends Component {
         );
     }
 }
+
+function select(store){
+    return {
+        user: store.user.user,
+  }
+}
+
+export default connect(select)(ProfileScreen);

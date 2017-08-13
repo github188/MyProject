@@ -1,7 +1,7 @@
 'use strict'
 
-import { addNavigationHelpers,StackNavigator } from 'react-navigation';
-import React,{Component} from 'react';
+import { addNavigationHelpers, StackNavigator } from 'react-navigation';
+import React,{ Component} from 'react';
 import { connect } from 'react-redux';
 
 import MainScreen from '../screen/MainScreen';
@@ -22,6 +22,7 @@ import SearchScreen from '../screen/SearchScreen';
 import ProfileScreen from '../screen/ProfileScreen';
 import ConfirmScreen from '../screen/ConfirmScreen';
 
+//堆栈导航组件
 export const MainStackNav = StackNavigator({
     Main: { screen: MainScreen },
     Menu: { screen: MenuScreen },
@@ -29,24 +30,24 @@ export const MainStackNav = StackNavigator({
     QRScanner: { screen: QRScannerScreen },
     QRInput: { screen: QRInputScreen },
     QRTab: { screen: QRTabRouter },
-    Login : { screen:LoginScreen},
-    Payment : { screen :PaymentScreen},
-    Wallet : { screen:WalletScreen},
-    Borrow : { screen :BorrowHistoryScreen},
-    Coupon : { screen :CouponScreen},
-    Setting : { screen :SettingScreen},
-    About : { screen :AboutScreen},
-    Share : { screen :ShareScreen},
-    Search:{ screen:SearchScreen},
-    Profile: { screen:ProfileScreen},
+    Login : { screen: LoginScreen},
+    Payment : { screen: PaymentScreen},
+    Wallet : { screen: WalletScreen},
+    Borrow : { screen: BorrowHistoryScreen},
+    Coupon : { screen: CouponScreen},
+    Setting : { screen: SettingScreen},
+    About : { screen: AboutScreen},
+    Share : { screen: ShareScreen},
+    Search:{ screen: SearchScreen},
+    Profile: { screen: ProfileScreen},
     Confirm: { screen: ConfirmScreen},
 },{
-    initialRouteName:'Main',
+    initialRouteName: 'Main',
     headerMode: 'none'
 });
 
 const MainStackRouter = ({ dispatch, nav }) => (
-    <MainStackNav navigation={addNavigationHelpers({ dispatch, state: nav })} />
+    <MainStackNav navigation={ addNavigationHelpers({ dispatch, state: nav })} />
 );
 
 const mapStateToProps = state => ({

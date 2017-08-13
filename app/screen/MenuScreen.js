@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, List, ListItem,Separator,StyleProvider,Thumbnail,View} from "native-base";
+import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, List, ListItem, StyleProvider,Thumbnail ,View } from "native-base";
 import getTheme from '../../native-base-theme/components';
 import mytheme from '../../native-base-theme/variables/mytheme';
 import { connect } from 'react-redux';
 
+//菜单组件
 class MenuScreen extends Component {
 
     getPhoneNumberD(phone){

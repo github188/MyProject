@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title,List, ListItem,StyleProvider} from "native-base";
+import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, List, ListItem ,StyleProvider} from "native-base";
 import getTheme from '../../native-base-theme/components';
 import mytheme from '../../native-base-theme/variables/mytheme'
 import {connect} from 'react-redux';
 import {logout} from '../actions/user'
 
+//设置
 class SettingScreen extends Component {
 
+    //注销
     handleLogout(){
         this.props.dispatch(logout());
         console.log('logout');
         this.props.navigation.dispatch({type:'Logout'});
-        //this.props.navigation.goBack(this.props.routes[0].key);
     }
 
     render() {

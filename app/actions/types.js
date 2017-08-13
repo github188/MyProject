@@ -1,5 +1,6 @@
 'use strict'
 
+export const HOST_IP='192.168.1.4';
 export const LOGIN_DOING = 'LOGIN_DOING';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_ERROR = 'LOGIN_ERROR';
@@ -23,3 +24,9 @@ export const CONFIRM_ERROR = 'CONFIRM_ERROR';
 export const REFUND_DOING = 'REFUND_DOING';
 export const REFUND_SUCCESS = 'REFUND_SUCCESS';
 export const REFUND_ERROR = 'REFUND_ERROR';
+export const USE_UMBRELLA ='USING_UMBRELLA';
+export const BORROWING_UMBRELLA ='BORROWING_UMBRELLA';
+export const BORROWED_UMBRELLA ='BORROWING_UMBRELLA';
+export const RETURNING_UMBRELLA ='RETURN_UMBRELLA';
+export const RETURNED_UMBRELLA ='RETURN_UMBRELLA';
+

@@ -44,6 +44,5 @@ export default function nav(state, action) {
             break;
     }
 
-    // Simply return the original `state` if `nextState` is null or undefined.
     return nextState || state;
 }

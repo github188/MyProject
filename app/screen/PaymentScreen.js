@@ -6,6 +6,7 @@ import { RadioButtons } from 'react-native-radio-buttons';
 import {connect} from 'react-redux';
 import {pay} from '../actions/payment'
 
+//支付组件
 class PaymentScreen extends Component {
 
     state = {checkListOption:null}

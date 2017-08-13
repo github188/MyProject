@@ -20,7 +20,7 @@ export default class CountDown extends Component {
         beginText:React.PropTypes.string,   //初始状态文字
         endText:React.PropTypes.string,     //读秒结束后文字
         count:React.PropTypes.number,       //计时数
-        auto:React.PropTypes.bool,
+        auto:React.PropTypes.bool,          //是否自动开始计时
         pressAction:React.PropTypes.func,   //按下按钮的事件,但是触发倒数需要你自己来调用方法
         changeWithCount:React.PropTypes.func,   //读秒变化的函数,该函数带有一个参数count,表示当前的剩余事件
         end:React.PropTypes.func,           //读秒完毕后的函数
@@ -57,11 +57,12 @@ export default class CountDown extends Component {
             this.startCountDown();
         }
     }
-
+    //清除计时
     componentWillUnmount() {
         this.interval && clearInterval(this.interval)
     }
 
+    //开始倒计时，间隔1秒
     startCountDownWithCount(startTime){
         const {changeWithCount,endText,count,end}= this.props;
         this.startTime = startTime;
@@ -78,7 +79,7 @@ export default class CountDown extends Component {
             })
         },1000)
     }
-
+    //记录计时器信息 用于切换界面后继续倒计时
     recordTimerInfo(){
         const {id , count} = this.props;
         var hasRecord = false;

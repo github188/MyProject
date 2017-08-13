@@ -1,6 +1,8 @@
 'use strict';
+
 import * as types from './types';
 
+//支付
 export function pay(opt){
     return dispatch => {
         dispatch({type: types.PAY_DOING});
@@ -14,6 +16,7 @@ export function pay(opt){
             }
 }
 
+//店员确认
 export function confirm(){
     return dispatch => {
         dispatch({type: types.CONFIRM_DOING});
@@ -27,6 +30,7 @@ export function confirm(){
     }
 }
 
+//退还
 export function refund(){
     return dispatch => {
         dispatch({type: types.REFUND_DOING});

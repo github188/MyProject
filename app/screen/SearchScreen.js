@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title,List, ListItem,StyleProvider,Input,Item} from "native-base";
+import { Container, Header, Content, Icon, StyleProvider, Input, Item} from "native-base";
 import getTheme from '../../native-base-theme/components';
 import mytheme from '../../native-base-theme/variables/mytheme'
 
+//搜索
 export default class WalletScreen extends Component {
     render() {
         return (

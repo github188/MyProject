@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import { StyleSheet,BackHandler,Platform } from 'react-native';
-import { Container, Header, Content, Footer, FooterTab, Body, Left, Right, Button, Text, Icon, Title,View,Fab,Card,CardItem ,StyleProvider,Item,Input} from "native-base";
-import { MapView, MapTypes, MapModule, Geolocation } from 'react-native-baidu-map';
+import { BackHandler,Platform } from 'react-native';
+import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, View, Card, CardItem ,StyleProvider, Item} from "native-base";
+import { MapView, MapTypes} from 'react-native-baidu-map';
 import Dimensions from 'Dimensions';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
-import {getCurrentLocation, getStoreLocation} from '../actions/location';
+import { getCurrentLocation, getStoreLocation} from '../actions/location';
 import getTheme from '../../native-base-theme/components';
 import mytheme from '../../native-base-theme/variables/mytheme'
 
 const windowHeight = Dimensions.get('window').height;
-const initialLongitude = 121.480232
-const initialLatitude = 31.236297
 
 const styles ={
     map: {
@@ -43,6 +41,7 @@ const styles ={
     }
 };
 
+//地图组件
 class MainScreen extends Component {
 
     constructor(props){
@@ -62,7 +61,7 @@ class MainScreen extends Component {
             }
             return true;
         }
-
+    //绑定返回键
     componentWillMount(){
         if (Platform.OS === 'android') {
             BackHandler.addEventListener('hardwareBackPress', this._onBackAndroid);

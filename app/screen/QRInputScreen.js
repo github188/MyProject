@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {Image} from 'react-native';
+import { Image} from 'react-native';
 import { NavigationActions } from 'react-navigation';
-import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, Form, Item, Label, Input,View} from "native-base";
+import { Container, Header, Content, Body, Left, Right, Button, Icon, Title, Form, Item, Label, Input, View} from "native-base";
 
 const styles={
     view_content:{
@@ -15,6 +15,7 @@ const styles={
     }
 }
 
+//输入二维码组件
 export default class QRInputScreen extends Component {
     render() {
         return (
