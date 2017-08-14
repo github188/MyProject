@@ -129,6 +129,9 @@ class MainScreen extends Component {
                                         <Text>剩余x把 距离xx米 步行x分钟</Text>
                                     </CardItem>
                                 </Card>
+                                <Button>
+                                    <Icon name='wb-sunny'/>
+                                </Button>
                             </View>
                             <View style={styles.view_button_bar}>
                                 <Button transparent
