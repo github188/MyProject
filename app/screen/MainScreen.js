@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BackHandler,Platform } from 'react-native';
+import { BackHandler,Platform, Image } from 'react-native';
 import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, View, Card, CardItem ,StyleProvider, Item} from "native-base";
 import { MapView, MapTypes} from 'react-native-baidu-map';
 import Dimensions from 'Dimensions';
@@ -108,45 +108,59 @@ class MainScreen extends Component {
                             </Button>
                         </Right>
                     </Header>
-                        <View style={{ flex: 1 }}>
-                            <MapView
-                                zoom={this.state.zoom}
-                                mapType={this.state.mapType}
-                                center={this.props.center}
-                                zoomControlsVisible ={false}
-                                style={styles.map}
-                                marker ={{
-                                    latitude: this.props.center.latitude,
-                                    longitude: this.props.center.longitude,
-                                    title:'当前位置',
-                                    icon:'icon_default'}}
-                                markers= {this.props.stores}
-                            >
-                            </MapView>
-                            <View style={styles.view_card_bar}>
-                                <Card>
-                                    <CardItem style={styles.view_card_bar_item}>
-                                        <Text>剩余x把 距离xx米 步行x分钟</Text>
-                                    </CardItem>
-                                </Card>
-                                <Button>
-                                    <Icon name='wb-sunny'/>
+                    <View style={{ flex: 1 }}>
+                        <Fab
+                            active={this.state.active}
+                            direction="down"
+                            containerStyle={{ }}
+                            position="topRight"
+                            onPress={() => this.setState({ active: !this.state.active })}>
+                            <Image source={require('../resource/image/weather/shadow.png')} />
+                                <Button disabled transparent>
+                                    <Image source={require('../resource/image/shadow.png')} />
                                 </Button>
-                            </View>
-                            <View style={styles.view_button_bar}>
-                                <Button transparent
-                                    onPress={() => this.refreshCurrentPosition()}>
-                                    <Icon name='my-location' />
+                                    <Button disabled transparent>
+                                    <Image source={require('../resource/image/shadow.png')} />
                                 </Button>
-                                <Button rounded onPress={() => this.redirect2Login('QRScanner')}>
-                                    <Icon name='filter-center-focus' />
-                                    <Text>立即用伞</Text>
+                                <Button disabled transparent>
+                                    <Image source={require('../resource/image/shadow.png')} />
                                 </Button>
-                                <Button transparent>
-                                    <Icon name='help' />
-                                </Button>
-                            </View>
+                        </Fab>
+                        <MapView
+                            zoom={this.state.zoom}
+                            mapType={this.state.mapType}
+                            center={this.props.center}
+                            zoomControlsVisible ={false}
+                            style={styles.map}
+                            marker ={{
+                                latitude: this.props.center.latitude,
+                                longitude: this.props.center.longitude,
+                                title:'当前位置',
+                                icon:'icon_default'}}
+                            markers= {this.props.stores}
+                        >
+                        </MapView>
+                        <View style={styles.view_card_bar}>
+                            <Card>
+                                <CardItem style={styles.view_card_bar_item}>
+                                    <Text>剩余x把 距离xx米 步行x分钟</Text>
+                                </CardItem>
+                            </Card>
                         </View>
+                        <View style={styles.view_button_bar}>
+                            <Button transparent
+                                onPress={() => this.refreshCurrentPosition()}>
+                                <Icon name='my-location' />
+                            </Button>
+                            <Button rounded onPress={() => this.redirect2Login('QRScanner')}>
+                                <Icon name='filter-center-focus' />
+                                <Text>立即用伞</Text>
+                            </Button>
+                            <Button transparent>
+                                <Icon name='help' />
+                            </Button>
+                        </View>
+                    </View>
                 </Container>
             </StyleProvider>
         );
@@ -206,6 +220,7 @@ function select(store){
         address:store.location.address,
         routes:store.nav.routes,
         status:store.location.status,
+        weather:store.location.weather,
   }
 }
 

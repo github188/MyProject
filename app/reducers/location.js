@@ -10,7 +10,8 @@ const initialState={
         longitude: initialLongitude,
         latitude: initialLatitude},
     address:null,
-    status:null
+    status:null,
+    weather:null,
 };
 
 export default function locate(state=initialState,action){
@@ -47,6 +48,18 @@ export default function locate(state=initialState,action){
             return{...state,
                     status:null
             };
+
+        case types.GETTING_WEATHER:
+            return{...state,
+                    status:'gettingWeather'
+            };
+
+        case types.GOT_WEATHER:
+            return{...state,
+                    status:null,
+                    weather:action.weather
+            };
+
         default:
             return state;
      }
