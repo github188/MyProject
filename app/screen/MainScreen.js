@@ -115,15 +115,15 @@ class MainScreen extends Component {
                             containerStyle={{ }}
                             position="topRight"
                             onPress={() => this.setState({ active: !this.state.active })}>
-                            <Image source={require('../resource/image/weather/shadow.png')} />
+                            <Image source={require('../resource/image/weather/100.png')} />
                                 <Button disabled transparent>
-                                    <Image source={require('../resource/image/shadow.png')} />
+                                    <Image source={require('../resource/image/weather/101.png')} />
                                 </Button>
                                     <Button disabled transparent>
-                                    <Image source={require('../resource/image/shadow.png')} />
+                                    <Image source={require('../resource/image/weather/102.png')} />
                                 </Button>
                                 <Button disabled transparent>
-                                    <Image source={require('../resource/image/shadow.png')} />
+                                    <Image source={require('../resource/image/weather/103.png')} />
                                 </Button>
                         </Fab>
                         <MapView
