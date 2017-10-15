@@ -10,54 +10,58 @@ const initialState={
         longitude: initialLongitude,
         latitude: initialLatitude},
     address:null,
-    status:null,
-    weather:null,
+    locateStatus:null,
+    locateStoreStatus:null,
+    getWeatherStatus:null,
+    weather:999,
 };
 
 export default function locate(state=initialState,action){
     switch(action.type){
         case types.LOCATING:
             return{...state,
-                    status:'locating'
+                    locateStatus:'doing'
             };
 
         case types.LOCATE_SUCCESS:
             return{...state,
                     center:action.center,
                     address:action.address,
-                    status:'located'
+                    locateStatus:'done'
             };
 
         case types.LOCATE_ERROR:
             return{...state,
-                    status:null
+                    locateStatus:null
             };
 
         case types.LOCATING_STORE:
             return{...state,
-                    status:'locatingStore'
+                    locateStoreStatus:'doing'
             };
 
         case types.LOCATE_STORE_SUCCESS:
             return{...state,
                     stores:action.stores,
-                    status:null
+                    locateStoreStatus:'done',
+                    locateStatus:'allDone'
             };
 
         case types.LOCATE_STORE_ERROR:
             return{...state,
-                    status:null
+
+                    locateStoreStatus:null
             };
 
         case types.GETTING_WEATHER:
             return{...state,
-                    status:'gettingWeather'
+                    getWeatherStatus:'doing'
             };
 
         case types.GOT_WEATHER:
             return{...state,
-                    status:null,
-                    weather:action.weather
+                    weather:action.weather,
+                    getWeatherStatus:'done',
             };
 
         default:

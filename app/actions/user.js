@@ -8,7 +8,7 @@ export function login(opt){
         dispatch({type: types.LOGIN_DOING});
         let result = fetch('http://www.baidu.com')
             .then((res)=>{
-                dispatch({type: types.LOGIN_SUCCESS, result: true, user:{name:opt.name,id:2}});
+                dispatch({type: types.LOGIN_SUCCESS, result: true, user:{phoneNumber:opt.phoneNumber,id:1}});
             })
             .catch((e)=>{
                 dispatch({type: types.LOGIN_ERROR, result:false, error:e});

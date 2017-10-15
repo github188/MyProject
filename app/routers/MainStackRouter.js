@@ -21,6 +21,9 @@ import ShareScreen from '../screen/ShareScreen';
 import SearchScreen from '../screen/SearchScreen';
 import ProfileScreen from '../screen/ProfileScreen';
 import ConfirmScreen from '../screen/ConfirmScreen';
+import RefundScreen from '../screen/RefundScreen';
+import ReturnedScreen from '../screen/ReturnedScreen';
+import PayWebScreen from '../screen/PayWebScreen';
 
 //堆栈导航组件
 export const MainStackNav = StackNavigator({
@@ -41,6 +44,9 @@ export const MainStackNav = StackNavigator({
     Search:{ screen: SearchScreen},
     Profile: { screen: ProfileScreen},
     Confirm: { screen: ConfirmScreen},
+    Refund: { screen: RefundScreen},
+    Returned:{screen: ReturnedScreen},
+    PayWeb:{screen: PayWebScreen}
 },{
     initialRouteName: 'Main',
     headerMode: 'none'

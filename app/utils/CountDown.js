@@ -24,6 +24,7 @@ export default class CountDown extends Component {
         pressAction:React.PropTypes.func,   //按下按钮的事件,但是触发倒数需要你自己来调用方法
         changeWithCount:React.PropTypes.func,   //读秒变化的函数,该函数带有一个参数count,表示当前的剩余事件
         end:React.PropTypes.func,           //读秒完毕后的函数
+        fontSize:React.PropTypes.number,
     }
 
     componentWillMount() {
@@ -109,7 +110,7 @@ export default class CountDown extends Component {
 
     render(){
         return (
-            <Text>
+            <Text style={{fontSize:this.props.fontSize}}>
                 {this.state.timer}
             </Text>
         );

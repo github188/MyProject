@@ -1,6 +1,7 @@
 'use strict';
 
 import * as types from './types';
+import * as config from '../config/config';
 import { Geolocation } from 'react-native-baidu-map';
 
 //解析附近商店查询返回列表
@@ -19,25 +20,15 @@ function handleStores(stores){
 }
 
 //解析天气数据
-function handleWeatherHourly(weatherNow,weatherHourly){
-    let result = new Array();
-    console.log('get stores',stores.length);
-    for (var i =0;i<stores.length;i++){
-        let store = stores[i];
-        result[i]={
-            latitude:store.y,
-            longitude:store.x,
-            title:store.shopname+','+store.shopaddress+','+store.count+'把',
-            icon:'icon_umbrella' }
-    }
-    return result;
+function handleWeather(weather){
+    return weather.HeWeather5[0].now.cond.code
 }
 
 //获取周围商店信息
 export function getStoreLocation(opt){
     return dispatch => {
         dispatch({type: types.LOCATING_STORE});
-        let result = fetch('http://'+types.HOST_IP+':9090/phone/nearshops', {
+        let result = fetch(config.NEAR_SHOPS_URL, {
                        method: 'POST',
                        headers: {
                          'Content-Type': 'application/json;charset=utf-8',
@@ -72,20 +63,18 @@ export function getCurrentLocation(){
 
 //获取当前位置当前和每小时天气 当前写死上海
 export function getWeather(opt){
-    const weatherNowURL = 'https://free-api.heweather.com/v5/now?city=shanghai&key=e6f8e50713c5452c8171d8ee7977fe0d';
-    const weatherHourlyURL = 'https://free-api.heweather.com/v5/hourly?city=shanghai&key=e6f8e50713c5452c8171d8ee7977fe0d';
     return dispatch => {
         dispatch({type:types.GETTING_WEATHER});
-        let resultNow=fetch(weatherNowURL).
+        let resultNow=fetch(config.WEATHER_NOW_URL).
             then((res)=>res.json()).
             then((resJson) => {
-                dispatch({type: types.GOT_WEATHER_NOW, weatherHourly: handleWeather(resJson)})
+                dispatch({type: types.GOT_WEATHER, weather: handleWeather(resJson)})
             })
-        let resultHourly=fetch(weatherHourlyURL).
+        /*let resultHourly=fetch(weatherHourlyURL).
             then((res)=>res.json()).
             then((resJson) => {
                 dispatch({type: types.GOT_WEATHER_HOURLY, weatherHourly: handleWeather(resJson)})
-            })
+            })*/
     }
 }
 

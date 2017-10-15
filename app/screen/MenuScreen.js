@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, List, ListItem, StyleProvider,Thumbnail ,View } from "native-base";
+import { Image } from 'react-native';
+import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, List, ListItem, StyleProvider, Thumbnail ,View } from "native-base";
 import getTheme from '../../native-base-theme/components';
 import mytheme from '../../native-base-theme/variables/mytheme';
 import { connect } from 'react-redux';
@@ -37,11 +38,15 @@ class MenuScreen extends Component {
                         <List>
                             <ListItem onPress={() => this.props.navigation.navigate('Profile')}>
                                 <View style={{flex:1,justifyContent: 'space-around',alignItems: 'center'}}>
-                                    <Thumbnail large source={require('../resource/image/default_face.png')} />
+                                    <Image source={require('../resource/image/default_face.png')} />
                                     <Text> </Text>
-                                    <Text>{this.getPhoneNumberD(this.props.user.name)}</Text>
+                                    <Text>{this.getPhoneNumberD(this.props.user.phoneNumber)}</Text>
                                     <Text>  </Text>
-                                    <Button bordered small><Text>电信用户</Text></Button>
+                                    <View style={{flexDirection: 'row',justifyContent: 'space-between',alignItems: 'center'}}>
+                                        <Button bordered small><Text>电信用户</Text></Button>
+                                        <Text>  </Text>
+                                        <Button bordered small><Text>  已实名  </Text></Button>
+                                    </View>
                                 </View>
                             </ListItem>
                             <ListItem icon onPress={() => this.props.navigation.navigate('Wallet')}>

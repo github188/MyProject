@@ -10,6 +10,7 @@ import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import org.lovebing.reactnative.baidumap.BaiduMapPackage;
 import com.theweflex.react.WeChatPackage;
+import com.dieam.reactnativepushnotification.ReactNativePushNotificationPackage;  // <--- Import Package
 
 import java.util.Arrays;
 import java.util.List;
@@ -28,7 +29,8 @@ public class MainApplication extends Application implements ReactApplication {
                 new MainReactPackage(),
                 new RCTCameraPackage(),
                 new BaiduMapPackage(getApplicationContext()),
-                new WeChatPackage()
+                new WeChatPackage(),
+                new ReactNativePushNotificationPackage() // <---- Add the Package
             );
         }
     };

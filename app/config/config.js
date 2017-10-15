@@ -1,0 +1,61 @@
+'use strict'
+
+export const HOST_IP='192.168.1.6';
+export const NEAR_SHOPS_URL='http://'+HOST_IP+':9090/phone/nearshops';
+export const BORROW_UMBRELLA_URL='http://'+HOST_IP+':9090/phone/borrowumbrella';
+export const RETURN_UMBRELLA_URL='http://'+HOST_IP+':9090/phone/borrowumbrella';
+export const WEATHER_NOW_URL = 'https://free-api.heweather.com/v5/now?city=shanghai&key=e6f8e50713c5452c8171d8ee7977fe0d';
+
+export const weatherPNG = {
+    100 : require('../resource/image/weather/100.png'),
+    101 : require('../resource/image/weather/101.png'),
+    102 : require('../resource/image/weather/102.png'),
+    103 : require('../resource/image/weather/103.png'),
+    104 : require('../resource/image/weather/104.png'),
+    200 : require('../resource/image/weather/200.png'),
+    201 : require('../resource/image/weather/201.png'),
+    202 : require('../resource/image/weather/202.png'),
+    203 : require('../resource/image/weather/203.png'),
+    204 : require('../resource/image/weather/204.png'),
+    205 : require('../resource/image/weather/205.png'),
+    206 : require('../resource/image/weather/206.png'),
+    207 : require('../resource/image/weather/207.png'),
+    208 : require('../resource/image/weather/208.png'),
+    209 : require('../resource/image/weather/209.png'),
+    210 : require('../resource/image/weather/210.png'),
+    211 : require('../resource/image/weather/211.png'),
+    212 : require('../resource/image/weather/212.png'),
+    213 : require('../resource/image/weather/213.png'),
+    300 : require('../resource/image/weather/300.png'),
+    301 : require('../resource/image/weather/301.png'),
+    302 : require('../resource/image/weather/302.png'),
+    303 : require('../resource/image/weather/303.png'),
+    304 : require('../resource/image/weather/304.png'),
+    305 : require('../resource/image/weather/305.png'),
+    306 : require('../resource/image/weather/306.png'),
+    307 : require('../resource/image/weather/307.png'),
+    308 : require('../resource/image/weather/308.png'),
+    309 : require('../resource/image/weather/309.png'),
+    310 : require('../resource/image/weather/310.png'),
+    311 : require('../resource/image/weather/311.png'),
+    312 : require('../resource/image/weather/312.png'),
+    313 : require('../resource/image/weather/313.png'),
+    400 : require('../resource/image/weather/400.png'),
+    401 : require('../resource/image/weather/401.png'),
+    402 : require('../resource/image/weather/402.png'),
+    403 : require('../resource/image/weather/403.png'),
+    404 : require('../resource/image/weather/404.png'),
+    405 : require('../resource/image/weather/405.png'),
+    406 : require('../resource/image/weather/406.png'),
+    407 : require('../resource/image/weather/407.png'),
+    500 : require('../resource/image/weather/500.png'),
+    501 : require('../resource/image/weather/501.png'),
+    502 : require('../resource/image/weather/502.png'),
+    503 : require('../resource/image/weather/503.png'),
+    504 : require('../resource/image/weather/504.png'),
+    507 : require('../resource/image/weather/507.png'),
+    508 : require('../resource/image/weather/508.png'),
+    900 : require('../resource/image/weather/900.png'),
+    901 : require('../resource/image/weather/901.png'),
+    999 : require('../resource/image/weather/999.png')
+};

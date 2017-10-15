@@ -3,49 +3,49 @@
 import * as types from '../actions/types';
 
 const initialState={
-    isLogin:true,
+    isLogin:false,
     user:{},
-    status:null,
+    userStatus:null,
 };
 
 export default function user(state=initialState,action){
     switch(action.type){
         case types.LOGIN_DOING:
             return{...state,
-                    status:'doing'
+                    userStatus:'login'
             };
 
         case types.LOGIN_SUCCESS:
             return{...state,
                     isLogin:true,
                     user:action.user,
-                    status:'loginDone'
+                    userStatus:'loginDone'
             };
 
         case types.LOGIN_ERROR:
             return{...state,
                     isLogin:false,
                     user:{},
-                    status:null
+                    userStatus:null
             };
 
         case types.LOGOUT_DOING:
             return{...state,
-                    status:'doing'
+                    userStatus:'logout'
             };
 
         case types.LOGOUT_SUCCESS:
             return{...state,
                     isLogin:false,
                     user:{},
-                    status:null
+                    userStatus:null
             };
 
         case types.LOGOUT_ERROR:
             return{...state,
                     isLogin:false,
                     user:{},
-                    status:null
+                    userStatus:null
             };
         default:
             return state;

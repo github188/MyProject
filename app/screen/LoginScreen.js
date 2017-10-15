@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, View, Input,Item ,Picker } from "native-base";
+import { Image } from 'react-native';
+import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, View, Input,Item ,Picker} from "native-base";
 import { connect} from 'react-redux';
-import { login} from '../actions/user'
-import { NavigationActions } from 'react-navigation'
+import { login} from '../actions/user';
+import { NavigationActions } from 'react-navigation';
+import Dimensions from 'Dimensions';
 
+const windowHeight = Dimensions.get('window').height;
+const windowWidth = Dimensions.get('window').width;
 //登录组件
 class LoginScreen extends Component {
     constructor(props) {
@@ -54,7 +58,7 @@ class LoginScreen extends Component {
             return;
         }
         let opt = {
-            'name': this.state.username,
+            'phoneNumber': this.state.username,
         };
         this.props.dispatch(login(opt));
         console.log('',)
@@ -63,7 +67,7 @@ class LoginScreen extends Component {
     shouldComponentUpdate(nextProps, nextState)
     {
         // 登录完成，且成功登录
-        if (nextProps.status === 'loginDone' && nextProps.isLogin) {
+        if (nextProps.userStatus === 'loginDone' && nextProps.isLogin) {
             this.props.navigation.dispatch({type:'Login',next:this.props.navigation.state.params.next});
             return false;
         }
@@ -88,37 +92,32 @@ class LoginScreen extends Component {
                         </Button>
                     </Right>
                 </Header>
-                <Content>
-                    <View style={{flexDirection: 'row',justifyContent: 'space-between',alignItems: 'center',margin:10}}>
-                        <Picker style={{flex:1}}
-                            iosHeader="Select one"
-                            mode="dropdown"
-                            selectedValue={this.state.selected}
-                            onValueChange={this.onValueChange.bind(this)}
-                        >
-                            <Item label="+86" value="+86" />
-                        </Picker>
-                        <Item regular style={{flex:2.5}}>
-                            <Input placeholder='请输入手机号' onChangeText={this.onChangeName} />
+                <View style={{ flex: 1}}>
+                    <Image source={require('../resource/image/login.png') } style={{height:windowWidth/2,width:windowWidth}} />
+                    <View style={{flexDirection: 'row',justifyContent: 'space-between',alignItems: 'center',margin:20}}>
+                        <Text style={{flex:1}}>手机号</Text>
+                        <Item regular style={{flex:3}}>
+                            <Input placeholder='请输入手机号' onChangeText={this.onChangeName} keyboardType='numeric' maxLength={11}/>
                         </Item>
                     </View>
-                    <View style={{flexDirection: 'row',justifyContent: 'space-between',alignItems: 'center',margin:10}}>
+                    <View style={{flexDirection: 'row',justifyContent: 'space-between',alignItems: 'center',margin:20}}>
                         <Text style={{flex:1}}>验证码</Text>
-                        <Item regular style={{flex:1.5}}>
-                            <Input placeholder='请输入验证码' onChangeText={this.onChangeVeriCode}/>
+                        <Item regular style={{flex:3}}>
+                            <Input placeholder='请输入验证码' onChangeText={this.onChangeVeriCode} keyboardType='numeric' maxLength={6}/>
+                            <Button disabled = {this.state.veriDisabled}>
+                                <Text>获取验证码</Text>
+                            </Button>
                         </Item>
-                        <Button disabled = {this.state.veriDisabled}>
-                            <Text>获取验证码</Text>
-                        </Button>
+
                     </View>
-                    <View style={{justifyContent: 'center',margin:10}}>
-                        <Button block disabled = {this.state.commitDisabled}  onPress = {() =>{
+                    <View style={{justifyContent: 'center',margin:20}}>
+                        <Button rounded disabled = {this.state.commitDisabled}  onPress = {() =>{
                             this.handleLogin();
                             }}>
                             <Text>确定</Text>
                         </Button>
                     </View>
-                </Content>
+                </View>
             </Container>
         );
     }
@@ -129,7 +128,7 @@ function select(store){
     return {
         isLogin: store.user.isLogin,
         user: store.user.user,
-        status: store.user.status,
+        userStatus: store.user.userStatus,
     }
 }
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Image } from 'react-native';
 import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, List, ListItem, StyleProvider, Thumbnail} from "native-base";
 import getTheme from '../../native-base-theme/components';
 import mytheme from '../../native-base-theme/variables/mytheme'
@@ -34,7 +35,7 @@ class ProfileScreen extends Component {
                                 <Body>
                                     <Text>头像</Text>
                                 </Body>
-                                <Thumbnail source={require('../resource/image/default_face.png')} />
+                                    <Image source={require('../resource/image/default_face.png')} />
                                 <Right>
                                     <Icon name="chevron-right" />
                                 </Right>
@@ -81,7 +82,7 @@ class ProfileScreen extends Component {
                                     <Text>手机号</Text>
                                 </Body>
                                 <Right>
-                                    <Text>{this.props.user.name}</Text>
+                                    <Text>{this.props.user.phoneNumber}</Text>
                                     <Icon name="chevron-right" />
                                 </Right>
                             </ListItem>

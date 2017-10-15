@@ -5,7 +5,23 @@ import mytheme from '../../native-base-theme/variables/mytheme';
 import { RadioButtons } from 'react-native-radio-buttons';
 import {connect} from 'react-redux';
 import {pay} from '../actions/payment'
+import Dimensions from 'Dimensions';
 
+const windowHeight = Dimensions.get('window').height;
+
+const styles ={
+    button_logout:{
+        flexDirection: 'row',
+        position: 'absolute',
+        left: 0,
+        bottom: 0,
+        right: 0,
+        justifyContent: 'space-around',
+        alignItems: 'center',
+        margin:20,
+        paddingBottom: windowHeight/20
+    }
+}
 //支付组件
 class PaymentScreen extends Component {
 
@@ -14,6 +30,7 @@ class PaymentScreen extends Component {
     handlePayment(){
         if (this.state.checkListOption){
             console.log('checkListOption',this.state.checkListOption);
+            this.props.navigation.navigate('PayWeb');
             this.props.dispatch(pay(this.state.checkListOption));
         }
         else{
@@ -24,7 +41,8 @@ class PaymentScreen extends Component {
 
     shouldComponentUpdate(nextProps, nextState)
     {
-        if (nextProps.status === 'paid') {
+        if (nextProps.paymentStatus === 'paid' & nextProps.useUmbrellaStatus != 'using') {
+            console.log('goto confirm')
             this.props.navigation.navigate('Confirm');
             return false;
         }
@@ -88,7 +106,11 @@ class PaymentScreen extends Component {
                             </Button>
                         </Right>
                     </Header>
-                    <Content>
+                    <View style={{flex:1}}>
+                        <View style={{justifyContent: 'space-around',alignItems: 'center',height:windowHeight/3}}>
+                            <Text style={{fontSize:24}}>支付押金 30 元</Text>
+                            <Text style={{fontSize:18}}>雨伞编号 {this.props.umbrellaId}</Text>
+                        </View>
                         <RadioButtons
                             options={ paymentOptions }
                             onSelection={ setSelectedOption.bind(this) }
@@ -96,10 +118,12 @@ class PaymentScreen extends Component {
                             renderOption={ renderOption }
                             renderContainer={ renderContainer }
                         />
-                        <Button onPress = { () => this.handlePayment()} >
-                            <Text>支付</Text>
-                         </Button>
-                    </Content>
+                        <View style={styles.button_logout}>
+                            <Button rounded onPress = { () => this.handlePayment()} >
+                                <Text>支付</Text>
+                            </Button>
+                        </View>
+                    </View>
                 </Container>
             </StyleProvider>
         );
@@ -108,7 +132,11 @@ class PaymentScreen extends Component {
 
 function select(store){
     return {
-        status: store.payment.status,
+        paymentStatus: store.payment.paymentStatus,
+        useUmbrellaStatus: store.umbrella.useUmbrellaStatus,
+        deposit:store.umbrella.deposit,
+        unitPrice:store.umbrella.unitPrice,
+        umbrellaId:store.umbrella.umbrellaId
     }
 }
 

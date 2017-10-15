@@ -1,23 +1,30 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, StyleProvider, View} from "native-base";
+import { Image } from 'react-native';
+import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, StyleProvider, View} from 'native-base';
 import getTheme from '../../native-base-theme/components';
 import mytheme from '../../native-base-theme/variables/mytheme'
 import { NavigationActions } from 'react-navigation';
-import { connect} from 'react-redux';
-import { refund} from '../actions/payment';
+import { connect } from 'react-redux';
+import { refund } from '../actions/payment';
+import { useUmbrella } from '../actions/umbrella';
 import CountDown from '../utils/CountDown';
+import Dimensions from 'Dimensions';
+
+const windowHeight = Dimensions.get('window').height;
+const windowWidth = Dimensions.get('window').width;
 
 //店员确认组件
 class ConfirmScreen extends Component {
 
     handleRefund(){
-        console.log('Refund');
-        this.props.dispatch(refund());
+        this.props.dispatch(useUmbrella());
+        console.log('confirmed');
+        this.props.navigation.dispatch({type:'Return2Main'});
     }
 
     shouldComponentUpdate(nextProps, nextState)
     {
-        if (nextProps.status === 'refunded') {
+        if (nextProps.paymentStatus === 'refunded') {
             this.props.navigation.dispatch({type:'Return2Main'})
             return false;
         }
@@ -35,7 +42,7 @@ class ConfirmScreen extends Component {
                             </Button>
                         </Left>
                         <Body>
-                            <Title>确认页面</Title>
+                            <Title>确认</Title>
                         </Body>
                         <Right>
                             <Button transparent>
@@ -43,23 +50,31 @@ class ConfirmScreen extends Component {
                             </Button>
                         </Right>
                     </Header>
-                    <Content>
-                        <Text>将雨伞交给营业员解锁</Text>
+                    <View style={{flex:1,justifyContent: 'space-around',alignItems: 'center'}}>
+                        <Text> </Text>
+                        <Text> </Text>
+                        <Text style={{fontSize:24}}>将雨伞交给营业员解锁</Text>
+                        <Text> </Text>
+                        <Image source={require('../resource/image/unlock.png') } style={{height:windowWidth/2,width:windowWidth}} />
+                        <Text> </Text>
                         <View>
                             <CountDown
                                 beginText='00:00'
                                 endText='请重新扫码'
-                                count={300}
+                                count={900}
                                 auto={true}
                                 changeWithCount={(count)=> ('0'+Math.floor(count / 60)).substr(-2) + ':'+ ('0'+count % 60).substr(-2)}
                                 id='confirmCD'
                                 ref={(e)=>{this.countDown=e}}
+                                fontSize={24}
                             />
                         </View>
-                        <Button onPress = { () => this.handleRefund()}>
+                        <Text> </Text>
+                        <Text> </Text>
+                        <Button rounded onPress = { () => this.handleRefund()}>
                             <Text>取消</Text>
                         </Button>
-                    </Content>
+                    </View>
                 </Container>
             </StyleProvider>
         );
@@ -68,7 +83,7 @@ class ConfirmScreen extends Component {
 
 function select(store){
     return {
-        status: store.payment.status,
+        paymentStatus: store.payment.paymentStatus,
     }
 }
 

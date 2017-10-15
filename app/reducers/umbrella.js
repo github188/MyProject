@@ -3,50 +3,50 @@
 import * as types from '../actions/types';
 
 const initialState={
-    umbrellaId:null,
-    shopId:null,
-    price:null,
-    fee:null,
+    umbrellaId:0,
+    shopId:0,
+    unitPrice:0,
+    count:1,
+    totalFee:0,
+    deposit:0,
+    discount:0,
+    orderNumber:0,
+    useUmbrellaStatus:null
 };
 
-export default function user(state=initialState,action){
+export default function umbrella(state=initialState,action){
     switch(action.type){
-        case types.LOGIN_DOING:
+        case types.BORROW_UMBRELLA:
             return{...state,
-                    status:'doing'
+                    useUmbrellaStatus:'borrow',
             };
 
-        case types.LOGIN_SUCCESS:
+        case types.BORROW_UMBRELLA_SUCCESS:
             return{...state,
-                    isLogin:true,
-                    user:action.user,
-                    status:'loginDone'
+                    useUmbrellaStatus:'borrowSuccess',
+                    umbrellaId:action.umbrellaId,
+                    unitPrice:action.unitPrice,
+                    deposit:action.deposit,
+                    orderNumber:action.orderNumber,
             };
 
-        case types.LOGIN_ERROR:
+        case types.USING_UMBRELLA:
             return{...state,
-                    isLogin:false,
-                    user:{},
-                    status:null
+                    useUmbrellaStatus:'using',
             };
 
-        case types.LOGOUT_DOING:
+        case types.RETURN_UMBRELLA:
             return{...state,
-                    status:'doing'
+                    useUmbrellaStatus:'returning'
             };
 
-        case types.LOGOUT_SUCCESS:
+        case types.RETURN_UMBRELLA_SUCCESS:
             return{...state,
-                    isLogin:false,
-                    user:{},
-                    status:null
-            };
-
-        case types.LOGOUT_ERROR:
-            return{...state,
-                    isLogin:false,
-                    user:{},
-                    status:null
+                    useUmbrellaStatus:null,
+                    umbrellaId:0,
+                    unitPrice:0,
+                    deposit:0,
+                    orderNumber:0,
             };
         default:
             return state;

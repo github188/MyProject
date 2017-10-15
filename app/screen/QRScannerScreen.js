@@ -6,6 +6,8 @@ import Camera from 'react-native-camera';
 import Dimensions from 'Dimensions';
 import getTheme from '../../native-base-theme/components';
 import mytheme from '../../native-base-theme/variables/mytheme'
+import { connect } from 'react-redux';
+import { borrowUmbrella } from '../actions/umbrella';
 
 const styles = {
     camera: {
@@ -223,7 +225,17 @@ class QRScannerMaskView extends Component{
 }
 
 //二维码扫描组件
-export default class QRScannerScreen extends Component {
+class QRScannerScreen extends Component {
+
+    shouldComponentUpdate(nextProps, nextState)
+    {
+        // 登录完成，且成功登录
+        if (nextProps.useUmbrellaStatus === 'borrowSuccess') {
+            this.props.navigation.navigate('Payment');
+            return false;
+        }
+        return true;
+    }
 
      render() {
         return (
@@ -236,7 +248,7 @@ export default class QRScannerScreen extends Component {
                             </Button>
                         </Left>
                         <Body>
-                            <Title>扫码取伞</Title>
+                            <Title>扫码用伞</Title>
                         </Body>
                         <Right>
                             <Button transparent>
@@ -277,23 +289,21 @@ export default class QRScannerScreen extends Component {
 
     //读取二维码操作
     readQR(e) {
-        ToastAndroid.showWithGravity(
-                        e.data,
-                        ToastAndroid.SHORT,
-                        ToastAndroid.CENTER,
-                      )
-        console.log('e',e.data);
-        let result = fetch('http://www.baidu.com')
-            .then((res)=>{
-                    ToastAndroid.showWithGravity(
-                                            'navigate',
-                                            ToastAndroid.SHORT,
-                                            ToastAndroid.CENTER,
-                                          )
-                    this.props.navigation.navigate('Payment');
-                })
-            .catch((e)=>{
-                });
+        if (!this.props.useUmbrellaStatus){
+            let opt={phoneNumber:this.props.phoneNumber,umbrellaId:e.data};
+            console.log(opt)
+            this.props.dispatch(borrowUmbrella(opt))
+        }
     }
 }
+
+function select(store){
+    return {
+        useUmbrellaStatus: store.umbrella.useUmbrellaStatus,
+        phoneNumber: store.user.user.phoneNumber,
+  }
+}
+
+
+export default connect(select)(QRScannerScreen);
 

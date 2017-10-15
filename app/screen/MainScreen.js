@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { BackHandler,Platform, Image } from 'react-native';
-import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, View, Card, CardItem ,StyleProvider, Item} from "native-base";
+import { BackHandler, Platform, Image } from 'react-native';
+import { Container, Header, Content, Body, Left, Right, Button, Text, Icon, Title, View, Card, CardItem , StyleProvider, Item, Fab} from "native-base";
 import { MapView, MapTypes} from 'react-native-baidu-map';
 import Dimensions from 'Dimensions';
 import { connect } from 'react-redux';
 import { NavigationActions } from 'react-navigation';
-import { getCurrentLocation, getStoreLocation} from '../actions/location';
+import { getCurrentLocation, getStoreLocation, getWeather} from '../actions/location';
 import getTheme from '../../native-base-theme/components';
-import mytheme from '../../native-base-theme/variables/mytheme'
+import mytheme from '../../native-base-theme/variables/mytheme';
+import {weatherPNG} from '../config/config'
+import PushNotification from 'react-native-push-notification';
 
 const windowHeight = Dimensions.get('window').height;
 
@@ -18,10 +20,12 @@ const styles ={
         height: windowHeight
     },
     view_card_bar:{
+        flexDirection: 'row',
         position: 'absolute',
+        top: 0,
         left: 0,
         right: 0,
-        justifyContent: 'space-around',
+        justifyContent: 'space-between',
         alignItems: 'center',
         paddingTop: windowHeight/40
     },
@@ -47,15 +51,17 @@ class MainScreen extends Component {
     constructor(props){
         super(props);
         this.props.dispatch(getCurrentLocation());
+        this.props.dispatch(getWeather());
         this.state = {
             mapType: MapTypes.NORMAL,
             zoom: 18,
+            fabActive: 'true'
         };
       }
 
     shouldComponentUpdate(nextProps, nextState)
         {
-            if (nextProps.status === 'located') {
+            if (nextProps.locateStatus === 'done') {
                 this.props.dispatch(getStoreLocation(nextProps.center));
                 return false;
             }
@@ -86,6 +92,15 @@ class MainScreen extends Component {
         return false;
     }
 
+    indict(){
+        if (!this.props.useUmbrellaStatus){
+            return {indict:'扫码用伞',iconName:'filter-center-focus',advertise:'广告栏招租'};
+        }
+        else{
+            return {indict:'归还雨伞',iconName:'assignment-return',advertise:'已用伞 1 天'};
+        }
+    }
+
     render() {
         return (
             <StyleProvider  style={getTheme(mytheme)}>
@@ -109,23 +124,6 @@ class MainScreen extends Component {
                         </Right>
                     </Header>
                     <View style={{ flex: 1 }}>
-                        <Fab
-                            active={this.state.active}
-                            direction="down"
-                            containerStyle={{ }}
-                            position="topRight"
-                            onPress={() => this.setState({ active: !this.state.active })}>
-                            <Image source={require('../resource/image/weather/100.png')} />
-                                <Button disabled transparent>
-                                    <Image source={require('../resource/image/weather/101.png')} />
-                                </Button>
-                                    <Button disabled transparent>
-                                    <Image source={require('../resource/image/weather/102.png')} />
-                                </Button>
-                                <Button disabled transparent>
-                                    <Image source={require('../resource/image/weather/103.png')} />
-                                </Button>
-                        </Fab>
                         <MapView
                             zoom={this.state.zoom}
                             mapType={this.state.mapType}
@@ -141,22 +139,57 @@ class MainScreen extends Component {
                         >
                         </MapView>
                         <View style={styles.view_card_bar}>
+                            <Button transparent>
+                                <Image source={weatherPNG[this.props.weather]} style={{height:30, width:30}} />
+                            </Button>
                             <Card>
                                 <CardItem style={styles.view_card_bar_item}>
-                                    <Text>剩余x把 距离xx米 步行x分钟</Text>
+                                    <Text>{this.indict().advertise}</Text>
                                 </CardItem>
                             </Card>
+                            <Button transparent>
+                                <Image source={weatherPNG[999]} style={{height:30, width:30}} />
+                            </Button>
                         </View>
                         <View style={styles.view_button_bar}>
                             <Button transparent
                                 onPress={() => this.refreshCurrentPosition()}>
                                 <Icon name='my-location' />
                             </Button>
-                            <Button rounded onPress={() => this.redirect2Login('QRScanner')}>
-                                <Icon name='filter-center-focus' />
-                                <Text>立即用伞</Text>
+                            <Button rounded onPress={() => {
+                                if (this.props.useUmbrellaStatus === 'using'){
+                                        this.props.navigation.navigate('Refund');}
+                                    else{
+                                        this.redirect2Login('QRScanner');
+                                    }
+                                }}>
+                                <Icon name={this.indict().iconName} />
+                                <Text>{this.indict().indict}</Text>
                             </Button>
-                            <Button transparent>
+                            <Button transparent onPress={() => PushNotification.localNotification({
+                                                                   /* Android Only Properties */
+                                                                   id: '0', // (optional) Valid unique 32 bit integer specified as string. default: Autogenerated Unique ID
+                                                                   ticker: "共享雨伞", // (optional)
+                                                                   autoCancel: true, // (optional) default: true
+                                                                   largeIcon: "share", // (optional) default: "ic_launcher"
+                                                                   smallIcon: "share", // (optional) default: "ic_notification" with fallback for "ic_launcher"
+                                                                   bigText: "附近可以还伞", // (optional) default: "message" prop
+                                                                   subText: "店名", // (optional) default: none
+                                                                   color: "red", // (optional) default: system default
+                                                                   vibrate: true, // (optional) default: true
+                                                                   vibration: 300, // vibration length in milliseconds, ignored if vibrate=false, default: 1000
+                                                                   tag: 'some_tag', // (optional) add tag to message
+                                                                   group: "group", // (optional) add group to message
+                                                                   ongoing: false, // (optional) set whether this is an "ongoing" notification
+                                                                   /* iOS and Android properties */
+                                                                   title: "共享雨伞", // (optional, for iOS this is only used in apple watch, the title will be the app name on other iOS devices)
+                                                                   message: "附近可以还伞", // (required)
+                                                                   playSound: true, // (optional) default: true
+                                                                   soundName: 'default', // (optional) Sound to play when the notification is shown. Value of 'default' plays the default sound. It can be set to a custom sound such as 'android.resource://com.xyz/raw/my_sound'. It will look for the 'my_sound' audio file in 'res/raw' directory and play it. default: 'default' (default sound is played)
+                                                                   number: '1', // (optional) Valid 32 bit integer specified as string. default: none (Cannot be zero)
+                                                                   repeatType: 'day', // (Android only) Repeating interval. Could be one of `week`, `day`, `hour`, `minute, `time`. If specified as time, it should be accompanied by one more parameter 'repeatTime` which should the number of milliseconds between each interval
+                                                                   actions: '["Yes", "No"]',  // (Android only) See the doc for notification actions to know more
+                                                               })}>
                                 <Icon name='help' />
                             </Button>
                         </View>
@@ -219,8 +252,9 @@ function select(store){
         stores:store.location.stores,
         address:store.location.address,
         routes:store.nav.routes,
-        status:store.location.status,
+        locateStatus:store.location.locateStatus,
         weather:store.location.weather,
+        useUmbrellaStatus:store.umbrella.useUmbrellaStatus,
   }
 }
 
